@@ -1,59 +1,114 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React,{useState} from 'react'
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import colors from '../../utils/Colors'
+import {grey1, grey2, white1 } from '../../utils/constan'
+import TodoModal from '../TodoModal'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-export default TodoList = ({ list }) =>{
-   const completedCount = list.todos.filter(todo => todo.completed).length;
-   const remainingCount = list.todos.length - completedCount;
+export default class TodoList extends React.Component {
 
+    state = {
+        showListVariable: false
+    }
+
+    toggleListModal(){
+        this.setState({showListVariable: !this.state.showListVariable})
+    }
+
+   render(){
+    const list = this.props.list
     return(
-        <View style={[styles.listContainer, { backgroundColor: list.color }]}>
-            <Text style={styles.listTitle} numberOfLines={1}>
-                {list.name}
+        <View style={{flexDirection:"column"}}>
+            <Modal animationType="slide" visible={this.state.showListVariable} onRequestClose={() => this.toggleListModal()}>
+
+            <TodoModal list={list} backModal={() => this.toggleListModal()} />    
+  
+            </Modal>
+        <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => this.toggleListModal()}
+        >
+            <Text style={styles.listWaktu} numberOfLines={1}>
+                {list.hari}
+                {list.tanggal}
+                <Text style={{color:grey2}}>
+
+                {list.jam}
+                </Text>
             </Text>
+            
+
+            <View style={styles.divider} />
 
             <View>
                 <View style ={{alignItems:"center"}}>
-                    <Text style={styles.count}>{completedCount}</Text>
-                    <Text style={styles.subtitle}>Remaining</Text>
+                    <Text style={styles.tempat}>{list.tempat}</Text>
                 </View>
             </View>
 
+
+            <View style={styles.divider} />
+
             <View>
                 <View style ={{alignItems:"center"}}>
-                    <Text style={styles.count}>{remainingCount}</Text>
-                    <Text style={styles.subtitle}>Completed</Text>
+                    <Text style={styles.acara}>{list.acara}</Text>
+
                 </View>
             </View>
+
+            <View style={styles.divider} />
+
+            <View>
+                <View style ={{alignItems:"center"}}>
+                    <Text style={styles.keterangan}>{list.keterangan}</Text>
+
+                </View>
+            </View>
+        </TouchableOpacity>
         </View>
+
     );
+   }
+   
+   
 };
 
 
 const styles = StyleSheet.create({
     listContainer:{
-        paddingVertical: 32,
-        paddingHorizontal: 16,
-        borderRadius: 6,
-        marginHorizontal: 12,
+        paddingVertical: hp('2%'),
+        paddingHorizontal:wp('2%'),
+        borderRadius: 10,
+        marginHorizontal:wp('2%'),
         alignItems: "center",
-        width: 200
+        width:wp('85%'),
+        height:hp('60%')
     },
-    listTitle:{
-        fontSize:24,
-        fontWeight: "700",
+    listWaktu:{
+        fontSize:hp('3%'),
+        height:hp('5%'),
         color: colors.white,
-        marginBottom: 18
+        flexDirection:"row",
+        textTransform:"uppercase",
     },
-    count:{
-        fontSize:48,
-        fontWeight: "200",
+    tempat:{
+        fontSize:hp('3%'),
+        textTransform:"uppercase",
+        textAlign:"center",
+        color: grey1
+    },
+    acara: {
+        fontSize: hp('2.8%'),
+        height:hp('35%'),
         color: colors.white
     },
-    subtitle: {
-        fontSize: 12,
-        fontWeight: "700",
+    keterangan:{
+        fontSize: hp('2.8%'),
+        height:hp('35%'),
         color: colors.white
+    },
+    divider: {
+        backgroundColor: white1,
+        height: hp('0.2%'),
+        paddingHorizontal:wp('43%')
     }
 })
 

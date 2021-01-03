@@ -1,93 +1,49 @@
 // Temporary Data sampai bisa connect ke Firebase
+// const GetDatas = () => {
+//     const arrData = [{x:"x"}]
+//     return arrData
+// }
+// export default GetDatas
 
 export default tempData = [
     {
-        name: "plan a trip",
-        color: "#24A6D9",
-        todos: [
-            {
-                title: "Book Flight",
-                completed: false
-            },
-            {
-                title: "Pasport Check",
-                completed: true
-            },
-            {
-                title: "Reserve Hotel Room",
-                completed: true
-            },
-            {
-                title: "Pack Luggage",
-                completed: false
-            },
-
-        ]
+        hari: "selasa ",
+        tanggal: "12-12-2020 ",
+        jam: "09:00 AM",
+        tempat: "gedung putih jhasdjhajksdhkasdj",
+        acara: "plan a tripjasdfajhkdfjk kajndfuhawea lksdjfaei" ,
+        keterangan:"jasdahwoioqeq lahdskfhakd fa k",
+        color: "#24A6D9"       
+       
     },
     {
-        name: " Errands ",
+        hari: "selasa",
+        tanggal: "12-12-2020",
+        jam: "09:00 AM",
+        tempat: "gedung putih",
+        acara: "plan a tripjasdfajhkdfjkkaldjfkljaldfjlkadjfkjalkdfjladfjalkdjflkajdfjaldkjflajdfkjalkdjflajdlfjalkdjflkafdajlklajkfd",
+        keterangan:"jasdahwoioqeq",
         color: "#8022D9",
-        todos: [
-            {
-                title: "Buy Milk",
-                completed: true
-            },
-            {
-                title: "Joshua",
-                completed: false
-            },
-            {
-                title: "Walking walking",
-                completed: false
-            },
-            {
-                title: "Sleeping",
-                completed: false
-            },
-        ]
+       
     },
     {
-        name: "Birthday ",
+        hari: "selasa",
+        tanggal: "12-12-2020",
+        jam: "09:00 AM",
+        tempat: "gedung putih",
+        acara: "plan a tripjasdfajhkdfjk",
+        keterangan:"jasdahwoioqeq",
         color: "#8022D9",
-        todos: [
-            {
-                title: "joget",
-                completed: true
-            },
-            {
-                title: "Joshua",
-                completed: true
-            },
-            {
-                title: "Walking ",
-                completed: true
-            },
-            {
-                title: "Swimming",
-                completed: false
-            },
-        ]
+        
     },
     {
-        name: "Party",
+        hari: "selasa",
+        tanggal: "12-12-2020",
+        jam: "09:00 AM",
+        tempat: "gedung putih",
+        acara: "plan a tripjasdfajhkdfjk",
+        keterangan:"jasdahwoioqeq",
         color: "#8022D9",
-        todos: [
-            {
-                title: "asMilk",
-                completed: true
-            },
-            {
-                title: "Joshua",
-                completed: true
-            },
-            {
-                title: "walking",
-                completed: true
-            },
-            {
-                title: "Doouu",
-                completed: true
-            },
-        ]
+        
     }
 ]

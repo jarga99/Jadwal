@@ -1,7 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { IconAdd, IconBack, IconNotif } from '../../assets'
-import colors from '../../utils/Colors'
+import { StyleSheet, Text, View } from 'react-native'
+import { IconAdd,IconAddLetter,IconAddModal, IconBack, IconClose, IconLetter, IconNotif } from '../../assets'
+import { blue } from '../../utils/constan'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 const ButtonIcon = ({ title }) => {
 
@@ -9,15 +11,24 @@ const ButtonIcon = ({ title }) => {
 
         if (title === "Add List") return <IconAdd />
 
-        if (title === "  ") return <IconNotif />
+        if (title === "Add letter") return <IconAddLetter/>
 
-        if (title === " ") return <IconBack/>
+        if (title === "    ") return <IconAddModal/>
+        
+        if (title === " ") return <IconLetter/>
+
+        if (title === "") return <IconNotif />
+
+        if (title === "  ") return <IconBack/>
+
+        if (title === "   ") return <IconClose/>
+
 
         return <IconAdd />
     }
     return (
         <View>
-            <View >
+            <View style={{alignSelf:"center"}} >
                 <Icon />
             </View>
             <Text style={styles.text} >{title}</Text>
@@ -30,10 +41,10 @@ export default ButtonIcon
 
 const styles = StyleSheet.create({
     text: {
-        color: colors.blue,
+        color: blue,
         fontFamily: "Poppins-SemiBold",
-        fontSize: 14,
-        marginTop: 8,
+        fontSize: 18,
+        marginTop: hp('1%'),
         textAlign: 'center'
     }
 })

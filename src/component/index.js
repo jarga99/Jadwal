@@ -1,6 +1,16 @@
 import TodoList from './TodoList'
 import ButtonIcon from './ButtonIcon'
 import AddListModal from './AddListModal'
+import TodoModal from './TodoModal'
+import ButtonAksi from './ButtonAksi'
 
 
-export { ButtonIcon, TodoList, AddListModal }
+
+export { 
+    ButtonAksi,
+    ButtonIcon,
+    TodoList,
+    AddListModal,
+    TodoModal,
+
+ }

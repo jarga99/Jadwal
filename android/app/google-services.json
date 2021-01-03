@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "582502467695",
+    "project_id": "todo-8acf9",
+    "storage_bucket": "todo-8acf9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582502467695:android:f14e2bf7ebdd77284d659a",
+        "android_client_info": {
+          "package_name": "com.jadwal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582502467695-9amehq02h2t4uai20qtkg0o1o8lnpfs1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jadwal",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "582502467695-uh88hq1lif30dlc1phmibtm7p6n6pk9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc0GZ3KBd1X5174S41_ZMUpgktschE6Ug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582502467695-uh88hq1lif30dlc1phmibtm7p6n6pk9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
