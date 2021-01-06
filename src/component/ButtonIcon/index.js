@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { IconAdd,IconAddLetter,IconAddModal, IconBack, IconClose, IconLetter, IconNotif } from '../../assets'
+import { IconAdd,IconAddLetter,IconAddModal, IconBack, IconClose, IconEdit, IconHapus, IconLetter, IconNotif ,IconDisposisi} from '../../assets'
 import { blue } from '../../utils/constan'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
@@ -11,9 +11,15 @@ const ButtonIcon = ({ title }) => {
 
         if (title === "Add List") return <IconAdd />
 
-        if (title === "Add letter") return <IconAddLetter/>
+        if (title === "Add Letter") return <IconAddModal/>
 
-        if (title === "    ") return <IconAddModal/>
+        if (title === "Edit Data") return <IconAddLetter/>
+
+        if (title === "Hapus") return <IconHapus/>
+
+        if (title === "Edit") return <IconEdit/>
+
+        if (title === "Disposisi") return <IconDisposisi/>
         
         if (title === " ") return <IconLetter/>
 

@@ -84,7 +84,7 @@ export default class Login extends React.Component {
             </View>
             <View style={styles.inForm}>
               <Text style={{ color: grey1, fontFamily: "Poppins-Regular", fontSize: hp('3%') }}>Password</Text>
-              <TextInput style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
+              <TextInput secureTextEntry={true} style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
                 placeholder=" Isi password"
                 onChangeText={text => this.setState({ password: text })}>
               </TextInput>

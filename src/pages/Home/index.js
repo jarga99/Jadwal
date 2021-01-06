@@ -1,8 +1,8 @@
 import React,{ useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
+import SharedPreferences from 'react-native-shared-preferences'
 import colors from '../../utils/Colors.js';
 import { AddListModal, ButtonIcon, TodoList } from '../../component';
-import tempData from '../../../tempData'
 import database from '@react-native-firebase/database';
 import { blue, white } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';

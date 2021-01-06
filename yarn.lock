@@ -1147,6 +1147,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-10.4.0.tgz#b2d0a202f5e8eb6cc4a29491271ea99fbfe1aba8"
   integrity sha512-WcTdp8AdI8aK0KcKxuCa+xGcRdh0U2/sEKi1A9xwgGIZdbFldGaaayz91ZGcds+6Zglh/s1NBB4kW/sKD81+CA==
 
+"@react-native-firebase/storage@^10.4.0":
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-10.4.0.tgz#b56d62050b8f172bac8e89d554af45f24e532855"
+  integrity sha512-kVQotHz5Sy0YQJkdghZ4zD0FaIh8JgkdW51wvQZ35xqDb1tckHJvjCXC1ImRl2jy4OFQ2UBaMsGOOjYcT8m2dA==
+
 "@react-navigation/core@^5.14.4":
   version "5.14.4"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.14.4.tgz#f63a2cd214bddbd25e1181f9335c32dfc3b6460f"
@@ -5940,6 +5945,11 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-document-picker@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-4.2.0.tgz#2d6f560fd902c5f9034c287941a9505f037b6eeb"
+  integrity sha512-bZlQ3ooOO+2G0J0vSvcWWv1OojMwhEhiF5M7gCKp3LT/VPikZnmzIGgCkhcu8HexxWLuaGToSAQAUL2VcSo5oQ==
+
 react-native-firebase-auth@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-firebase-auth/-/react-native-firebase-auth-1.0.1.tgz#d1b22469bd7fc9b283ac84ce8a7023974d7a2760"
@@ -5982,6 +5992,11 @@ react-native-screens@^2.16.1:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.16.1.tgz#b105a127378d90018a46daf0c2f6518fca60c06f"
   integrity sha512-WZ7m0sBDVaHbBnlHxwQnUlI6KNfQKHq+Unfw+VBuAlnSXvT+aw6Bb/K2bUlHzBgvrPjwY3Spc7ZERFuTwRLLwg==
+
+react-native-shared-preferences@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-shared-preferences/-/react-native-shared-preferences-1.0.2.tgz#952a02ab1e5418d48682cf1af96e2ee3fbf2a279"
+  integrity sha512-iLpHYE1kokUnPn9Y3Za301DkgDujjKMHKVUS9KOhHzIipc2mkzfFSo2bFAUYCfR2M4u0uZMpuVQviR19qypeHg==
 
 react-native-svg-transformer@^0.14.3:
   version "0.14.3"

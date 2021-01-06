@@ -9,11 +9,11 @@ const Stack = createStackNavigator();
 const Router = () => {
     return (
         <Stack.Navigator >
+            <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
             <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
             <Stack.Screen name="WelcomeAuth" component={WelcomeAuth} options={{ headerShown: false }} />
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-            <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
             <Stack.Screen name="Surat" component={Surat} options={{ headerShown: false }} />
             <Stack.Screen name="Notifikasi" component={Notifikasi} options={{ headerShown: false }} />
         </Stack.Navigator>

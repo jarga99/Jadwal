@@ -1,12 +1,18 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { ButtonIcon } from '../../component';
-import { blue, white } from '../../utils/constan.js';
+import React, {useState} from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView,Modal } from 'react-native';
+import {UploadSurat, ButtonIcon, Notifsurat } from '../../component';
+import { blue, white, grey1 } from '../../utils/constan.js';
+
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const Notifikasi = () => {
+
+const Surat = () => {
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+
     const handleGoTo = (screen) => {
-        navigation.navigate(screen);
+    navigation.navigate(screen);
     };
 
     return (
@@ -23,7 +29,7 @@ const Notifikasi = () => {
 
                             <TouchableOpacity style={styles.iconS}>
 
-                                <ButtonIcon title=" "  onPress={() => handleGoTo('Surat')}/>
+                                <ButtonIcon title=" " onPress={() => handleGoTo('Surat')} />
                             </TouchableOpacity>
                         </View>
 
@@ -39,12 +45,45 @@ const Notifikasi = () => {
 
                 </View>
             </View>
-            <View>
-                <Text>
-                    Halaman Surat
+
+            <Modal
+                animationType="slide"
+                visible={modalVisible} >
+                <UploadSurat backModal ={() => {
+                    setModalVisible(false)
+                }}/>
+            </Modal>
+
+            <View style={[styles.areaTitle, { flexDirection: "row" }]}>
+
+                <View style={styles.divider} />
+
+                <Text style={styles.title}>
+                    Surat <Text style={{ fontWeight: "300", color: blue }}>Masuk</Text>
                 </Text>
+
+                <View style={styles.divider} />
+
+
             </View>
 
+
+            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+
+                <Notifsurat/>
+
+                <Notifsurat/>
+
+                <Notifsurat/>
+
+                <Notifsurat/>
+
+                <Notifsurat/>
+
+                <Notifsurat/>
+
+
+            </ScrollView>
 
         </View>
     );
@@ -84,15 +123,33 @@ const styles = StyleSheet.create({
     },
     iconS: {
         marginVertical: hp('1.1%'),
-        paddingHorizontal:wp('3%')
+        paddingHorizontal: wp('3%')
 
     },
     iconN: {
         marginVertical: hp('1.1%'),
 
-    }
+    },
+    divider: {
+        backgroundColor: colors.lightblue,
+        height: 3,
+        flex: 1,
+        alignSelf: "center"
+    },
+    areaTitle: {
+        justifyContent: "space-between",
+        marginTop: hp('12%'),
+        marginBottom: hp('3%')
+    },
+    title: {
+        fontSize: 38,
+        fontFamily: "Poppins-SemiBold",
+        color: grey1,
+        paddingHorizontal: wp('5%'),
+
+    },
 
 });
 
-export default Notifikasi
+export default Surat
 

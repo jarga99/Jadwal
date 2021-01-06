@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SharedPreferences from 'react-native-shared-preferences'
 import {
   StyleSheet,
   View,
@@ -21,21 +22,35 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('')
 
   const ActionLogin = async () => {
+
     try {
+
       let data = await database().ref('/users/')
       data.once('value').then(async snapshot => {
+        
         await snapshot.forEach(async element => {
           var _element = await element.val()
+          
           if (username == _element.username && password == _element.password) {
-            navigation.replace("Home");
+            // Store to SharedPreferences
+            if (_element.username != null) {
+              SharedPreferences.setItem("user_id",_element.id.toString())
+              SharedPreferences.setItem("username",_element.username)
+              navigation.replace("Home");
+            }
+
           } else {
             console.log("Gagal");
           }
+
         })
+
       })
+
     } catch (error) {
       console.log(error);
     }
+    
   }
   return (
     <KeyboardAvoidingView style={styles.container} >
@@ -50,7 +65,7 @@ const Login = ({ navigation }) => {
             </TextInput>
           </View>
           <View style={styles.inForm}>
-            <Text style={{ color: grey1, fontFamily: "Poppins-Regular", fontSize: hp('3%') }}>Password</Text>
+            <Text secureTextEntry={true} style={{ color: grey1, fontFamily: "Poppins-Regular", fontSize: hp('3%') }}>Password</Text>
             <TextInput style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }} placeholder=" Isikan password" onChangeText={password => setPassword(password)}>
 
             </TextInput>

@@ -24,47 +24,31 @@ export default class TodoList extends React.Component {
             <TodoModal list={list} backModal={() => this.toggleListModal()} />    
   
             </Modal>
-        <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => this.toggleListModal()}
-        >
+        <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => this.toggleListModal()}>
+        
             <Text style={styles.listWaktu} numberOfLines={1}>
-                {list.hari}
-                {list.tanggal}
-                <Text style={{color:grey2}}>
-
-                {list.jam}
-                </Text>
+                {list.hari} {list.tanggal} <Text style={{color:grey2}}>{list.jam}</Text>
             </Text>
-            
-
             <View style={styles.divider} />
-
             <View>
                 <View style ={{alignItems:"center"}}>
                     <Text style={styles.tempat}>{list.tempat}</Text>
                 </View>
             </View>
-
-
             <View style={styles.divider} />
-
             <View>
                 <View style ={{alignItems:"center"}}>
                     <Text style={styles.acara}>{list.acara}</Text>
-
                 </View>
             </View>
-
             <View style={styles.divider} />
-
             <View>
                 <View style ={{alignItems:"center"}}>
                     <Text style={styles.keterangan}>{list.keterangan}</Text>
-
                 </View>
             </View>
         </TouchableOpacity>
         </View>
-
     );
    }
    

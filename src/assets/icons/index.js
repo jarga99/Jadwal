@@ -5,6 +5,9 @@ import IconLetter from './letter.svg'
 import IconNotif from './Notif.svg';
 import IconBack from './back.svg';
 import IconClose from './close.svg';
+import IconHapus from './hapus.svg';
+import IconEdit from './edit.svg';
+import IconDisposisi from './disposisi.svg';
 
 
 export {
@@ -14,5 +17,8 @@ export {
     IconLetter,
     IconNotif,
     IconBack,
-    IconClose
+    IconClose,
+    IconDisposisi,
+    IconHapus,
+    IconEdit
 }
