@@ -8,6 +8,7 @@ import IconClose from './close.svg';
 import IconHapus from './hapus.svg';
 import IconEdit from './edit.svg';
 import IconDisposisi from './disposisi.svg';
+import IconLogout from './logout.svg';
 
 
 export {
@@ -16,6 +17,7 @@ export {
     IconAddModal,
     IconLetter,
     IconNotif,
+    IconLogout,
     IconBack,
     IconClose,
     IconDisposisi,

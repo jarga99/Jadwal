@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import colors from './utils/Colors.js';
-import { AddListModal, ButtonIcon, TodoList } from './component/index.js';
+import { TodoList } from './component/index.js';
 import tempData from '../tempData';
-import { blue, white } from './utils/constan.js';
+import { white } from './utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Router from './Router'
 
@@ -29,80 +29,9 @@ export default class App extends React.Component {
 
         return (
             <NavigationContainer>
-                <Router/>
+                <Router />
             </NavigationContainer>
-            // <View style={styles.container}>
-
-            //     <View style={[styles.headerApp, { backgroundColor: blue }]}>
-
-            //         <View style={[styles.areaHead, { flexDirection: "row", justifyContent: "space-between", marginHorizontal: wp('2.5%'), flex: 1 }]} >
-
-            //             <Text style={styles.textHead}>Todo</Text>
-
-            //             <View style={{ flexDirection: "row" }}>
-            //                 <View>
-
-            //                     <TouchableOpacity style={styles.iconS}>
-
-            //                         <ButtonIcon title=" " />
-            //                     </TouchableOpacity>
-            //                 </View>
-
-            //                 <View>
-
-            //                     <TouchableOpacity style={styles.iconN}>
-
-
-            //                         <ButtonIcon title="" />
-            //                     </TouchableOpacity>
-            //                 </View>
-            //             </View>
-
-            //         </View>
-            //     </View>
-
-
-            //     {/* modal add list todo */}
-            //     <Modal
-            //         animationType="slide"
-            //         visible={this.state.addTodoVisible}
-            //         onRequestClose={() => this.toggleAddTodoModal()} >
-
-            //         <AddListModal backModal={() => this.toggleAddTodoModal()} />
-            //     </Modal>
-
-
-            //     <View style={[styles.areaTitle, { flexDirection: "row" }]}>
-
-            //         <View style={styles.divider} />
-
-            //         <Text style={styles.title}>
-            //             Daftar <Text style={{ fontWeight: "300", color: colors.blue }}>Acara</Text>
-            //         </Text>
-
-            //         <View style={styles.divider} />
-
-            //     </View>
-
-            //     <View style={{ marginVertical: hp('2%') }}>
-            //         <TouchableOpacity onPress={() => this.toggleAddTodoModal()} >
-            //             <ButtonIcon title="Add List" />
-            //         </TouchableOpacity>
-            //     </View>
-
-            //     <View style={{ height: hp('60%'), position: "relative" }}>
-
-            //         <FlatList
-            //             data={tempData}
-            //             keyExtractor={item => item.name}
-            //             horizontal={true}
-            //             showsHorizontalScrollIndicator={false}
-            //             renderItem={({ item }) =>
-
-            //                 this.renderList(item)}
-            //         />
-            //     </View>
-            // </View>
+           
         );
     }
 }
@@ -144,7 +73,7 @@ const styles = StyleSheet.create({
     },
     iconS: {
         marginVertical: hp('1.1%'),
-        paddingHorizontal:wp('3%')
+        paddingHorizontal: wp('3%')
 
     },
     iconN: {

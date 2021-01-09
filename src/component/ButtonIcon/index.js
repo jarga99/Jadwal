@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { IconAdd,IconAddLetter,IconAddModal, IconBack, IconClose, IconEdit, IconHapus, IconLetter, IconNotif ,IconDisposisi} from '../../assets'
+import { IconAdd,IconAddLetter,IconAddModal, IconBack, IconClose, IconEdit, IconHapus, IconLetter, IconNotif ,IconDisposisi, IconLogout} from '../../assets'
 import { blue } from '../../utils/constan'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
@@ -24,6 +24,8 @@ const ButtonIcon = ({ title }) => {
         if (title === " ") return <IconLetter/>
 
         if (title === "") return <IconNotif />
+
+        if (title === "    ") return <IconLogout/>
 
         if (title === "  ") return <IconBack/>
 

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import SharedPreferences from 'react-native-shared-preferences'
 import storage from '@react-native-firebase/storage';
 import DocumentPicker from 'react-native-document-picker';
+import RNPickerSelect from 'react-native-picker-select';
 import { Text, StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native'
 import colors from '../../utils/Colors'
 import { IconBack } from '../../assets'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { grey4, green, white1,blue } from '../../utils/constan';
+import { grey4, green, white1, blue } from '../../utils/constan';
 import database from '@react-native-firebase/database';
 
 const AddListModal = (props) => {
@@ -35,7 +36,7 @@ const AddListModal = (props) => {
             })
         })
     }, [])
-    
+
     const CreateTodo = async () => {
         try {
             const eventId = new Date().getTime() + new Date().getDay()
@@ -52,10 +53,10 @@ const AddListModal = (props) => {
                     acara: getAcara,
                     keterangan: getKeterangan,
                     color: getColor,
-                },
-                surat:{
-                    jenis_surat:getJSurat,
-                    file_surat:eventId+"-"+user_info.user_id
+                    surat: {
+                        jenis_surat: getJSurat,
+                        file_surat: eventId + "-" + user_info.user_id
+                    }
                 },
                 dateCreate: new Date().getTime()
             }
@@ -72,9 +73,9 @@ const AddListModal = (props) => {
                         { cancelable: false }
                     );
                 })
-            
-            const DoUpload = storage().ref(eventId+"-"+user_info.user_id).putFile(getFileMetaData.file_uri)
-            DoUpload.on("state_changed",snapshot => {
+
+            const DoUpload = storage().ref(eventId + "-" + user_info.user_id).putFile(getFileMetaData.file_uri)
+            DoUpload.on("state_changed", snapshot => {
                 console.log(snapshot);
             })
 
@@ -86,7 +87,7 @@ const AddListModal = (props) => {
     const FilePicker = async () => {
         try {
             const res = await DocumentPicker.pick({
-                type: [DocumentPicker.types.images]
+                type: [DocumentPicker.types.allFiles]
             })
             if (res.uri != null) {
                 setFileMetaData({ file_uri: res.uri, file_name: res.name })
@@ -125,10 +126,18 @@ const AddListModal = (props) => {
 
                     <View style={{ flexDirection: "row", justifyContent: "space-between", flex: 1 }}>
                         <View>
-                            <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Hari</Text>
-                            <TextInput style={styles.hari} onChangeText={(hari) => {
-                                setHari(hari)
-                            }} />
+                            <RNPickerSelect
+                                onValueChange={(value) => console.log(value)}
+                                items={[
+                                    { label: 'Senin', value: 'Senin' },
+                                    { label: 'Selasa', value: 'Selasa' },
+                                    { label: 'Rabu', value: 'Rabu' },
+                                    { label: 'Kamis', value: 'Kamis' },
+                                    { label: 'Jumat', value: 'Jumat' },
+                                    { label: 'Sabtu', value: 'Sabtu' },
+                                    { label: 'Minggu', value: 'Minggu'}
+                                ]}
+                            />
                         </View>
                         <View>
                             <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Tanggal</Text>
@@ -182,12 +191,12 @@ const AddListModal = (props) => {
                         </View>
                     </View>
 
-                    <View style={{marginBottom:hp('5%')}}>
+                    <View style={{ marginBottom: hp('5%') }}>
 
-                    <TouchableOpacity style={[styles.create, { backgroundColor: getColor }]} onPress={CreateTodo}>
-                        <Text style={{ color: colors.white, fontFamily: "Poppins-SemiBold", fontSize: hp('3%') }}>Create</Text>
+                        <TouchableOpacity style={[styles.create, { backgroundColor: getColor }]} onPress={CreateTodo}>
+                            <Text style={{ color: colors.white, fontFamily: "Poppins-SemiBold", fontSize: hp('3%') }}>Create</Text>
 
-                    </TouchableOpacity>
+                        </TouchableOpacity>
 
                     </View>
 
@@ -286,10 +295,10 @@ const styles = StyleSheet.create({
         marginTop: hp('4%'),
         marginBottom: hp('4%')
     },
-  
+
     jeniS: {
         borderWidth: StyleSheet.hairlineWidth,
-        borderColor:colors.blue,
+        borderColor: colors.blue,
         borderRadius: 6,
         marginTop: hp('0.2%'),
         paddingHorizontal: wp('1%'),
@@ -300,23 +309,23 @@ const styles = StyleSheet.create({
         borderColor: colors.blue,
         textAlignVertical: "top",
         borderRadius: 6,
-        width:wp('60%'),
+        width: wp('60%'),
         marginTop: hp('0.2%'),
-        marginRight:wp('2%'),
+        marginRight: wp('2%'),
         paddingHorizontal: wp('1%'),
         fontSize: hp('3%')
     },
-    browse:{
+    browse: {
         borderWidth: StyleSheet.hairlineWidth,
         borderColor: colors.blue,
-        borderRadius:6,
-        backgroundColor:blue,
-        width:wp('28%'),
+        borderRadius: 6,
+        backgroundColor: blue,
+        width: wp('28%'),
     },
-    txtUp:{
-        textAlign:"center",
-        marginTop:hp('1%'),
-        color:white1
+    txtUp: {
+        textAlign: "center",
+        marginTop: hp('1%'),
+        color: white1
     },
 
     create: {
@@ -325,7 +334,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: hp('1%'),
- 
+
     },
     colorSelect: {
         width: 40,

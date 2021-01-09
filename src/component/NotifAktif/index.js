@@ -3,16 +3,16 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { grey2,grey3, grey4, red } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const NotifAktif = () => {
+const NotifAktif = (props) => {
     return (
         <View style={{marginBottom:10}}>
             <TouchableOpacity style={[styles.NotiF, { backgroundColor: grey3 }]} >
                 <View style={{ flexDirection: "column" }} >
                     <View style={{ flexDirection: "row" }}>
-                        <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Yang berangkat</Text>
-                        <Text style={[styles.txtHead, {width:wp('28%'),color:red, textAlign:"right" }]} >10.00 AM</Text>
+                        <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Nama :{props.list.jenis_surat}</Text>
+                        <Text style={[styles.txtHead, {width:wp('28%'),color:red, textAlign:"right" }]} > {props.list.jam}</Text>
                     </View>
-                    <Text style={styles.isi}>Tempat Acara</Text>
+                    <Text style={styles.isi}>{props.list.tempat}</Text>
                 </View>
             </TouchableOpacity>
         </View>

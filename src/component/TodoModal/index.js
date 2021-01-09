@@ -1,7 +1,7 @@
-import React,{useState,useEffect} from 'react'
-import { StyleSheet, TouchableOpacity, SafeAreaView, View, Text, Modal } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, TouchableOpacity, SafeAreaView, View, Text } from 'react-native'
 
-import { EditJadwal, ButtonIcon,Disposisi} from '../../component';
+import { EditJadwal, ButtonIcon, Disposisi } from '../../component';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -25,42 +25,38 @@ const TodoModal = (props) => {
         setKeterangan(props.list.keterangan)
         setColor(props.list.color)
     }, [])
-    
+
+    const handleGoTo = (screen) => {
+        props.navigation.navigate(screen);
+    };
     return (
         <SafeAreaView style={styles.container}>
-                <Modal
-                animationType="slide"
-                visible={modalVisible} >
-                    <Disposisi backModal ={() => {
-                        setModalVisible(false)
-                    }}/>
-                </Modal>
-                <TouchableOpacity style={{ position: "absolute", top: hp('2.5%'), right: wp('4%'), zIndex: 10 }} onPress={props.backModal}>
+            <TouchableOpacity style={{ position: "absolute", top: hp('2.5%'), right: wp('4%'), zIndex: 10 }} onPress={props.backModal}>
 
-                    <ButtonIcon title="   " />
+                <ButtonIcon title="   " />
 
-                </TouchableOpacity>
+            </TouchableOpacity>
 
-                <View style={[styles.section, styles.header, { borderBottomColor: getColor }]} >
+            <View style={[styles.section, styles.header, { borderBottomColor: getColor }]} >
 
-                    <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row" }}>
 
-                        <Text style={styles.waktu}>{getHari} </Text>
-                        <Text style={styles.waktu}>{getTanggal} </Text>
-                        <Text style={styles.waktu}>{getAcara}</Text>
-                    </View>
-
+                    <Text style={styles.waktu}>{getHari} </Text>
+                    <Text style={styles.waktu}>{getTanggal} </Text>
+                    <Text style={styles.waktu}>{getAcara}</Text>
                 </View>
-                <ScrollView>
 
-                    <View style={[styles.section, styles.conten]}>
-                        <Text style={[styles.tempat, styles.Todocontainer]}>{getTempat}</Text>
-                        <Text style={[styles.acara, styles.Todocontainer]}>{getAcara}</Text>
-                        <Text style={[styles.keterangan, styles.Todocontainer]}>{getKeterangan}</Text>
-                    </View>
-                </ScrollView>
+            </View>
+            <ScrollView>
 
-                {/* <View style={[styles.section, { flex: 3 }]}>
+                <View style={[styles.section, styles.conten]}>
+                    <Text style={[styles.tempat, styles.Todocontainer]}>{getTempat}</Text>
+                    <Text style={[styles.acara, styles.Todocontainer]}>{getAcara}</Text>
+                    <Text style={[styles.keterangan, styles.Todocontainer]}>{getKeterangan}</Text>
+                </View>
+            </ScrollView>
+
+            {/* <View style={[styles.section, { flex: 3 }]}>
                     <FlatList
                         renderItem={({ item }) => this.renderTodo(item)}
                         keyExtractor={item => item.title}
@@ -70,20 +66,20 @@ const TodoModal = (props) => {
                     </FlatList>
                 </View> */}
 
-                <View style={[styles.btnIcon,{ flexDirection: "row", alignSelf: "center" }]}>
-                    <TouchableOpacity style={{ marginHorizontal: wp('5%') }}  onPress={() => {setModalVisible(true)}}>
-                        <ButtonIcon title="Edit" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ marginHorizontal: wp('2%') }}>
-                        <ButtonIcon title="Hapus" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ marginHorizontal: wp('2%') }}  onPress={() => {setModalVisible(true)}}>
-                        <ButtonIcon title="Disposisi" />
-                    </TouchableOpacity>
-                </View>
+            <View style={[styles.btnIcon, { flexDirection: "row", alignSelf: "center" }]}>
+                <TouchableOpacity style={{ marginHorizontal: wp('5%') }} onPress={() => handleGoTo('EditJadwal')}>
+                    <ButtonIcon title="Edit" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginHorizontal: wp('2%') }}>
+                    <ButtonIcon title="Hapus" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginHorizontal: wp('2%') }} onPress={() => handleGoTo('Disposisi')}>
+                    <ButtonIcon title="Disposisi" />
+                </TouchableOpacity>
+            </View>
 
 
-            </SafeAreaView>
+        </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
         fontSize: hp('3%'),
         fontFamily: "Poppins-SemiBold",
         paddingVertical: hp('1%'),
-        flexShrink:1
+        flexShrink: 1
     },
     conten: {
         paddingVertical: 64,
@@ -134,8 +130,8 @@ const styles = StyleSheet.create({
         marginTop: hp('4.5%')
 
     },
-    btnIcon:{
-        marginBottom:hp('15%')
+    btnIcon: {
+        marginBottom: hp('15%')
     }
 });
 export default TodoModal

@@ -1,13 +1,14 @@
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
 import SharedPreferences from 'react-native-shared-preferences'
 import colors from '../../utils/Colors.js';
 import { AddListModal, ButtonIcon, TodoList } from '../../component';
 import database from '@react-native-firebase/database';
-import { blue, white } from '../../utils/constan.js';
+import { blue, white, white1 } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { IconLetter, IconLogout, IconNotif } from '../../assets/index.js';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [getEvent, setEvent] = useState("")
     useEffect(() => {
@@ -20,7 +21,7 @@ const Home = ({navigation}) => {
             setEvent(arrData)
         })
     }, [])
-    const RenderList = ({item}) => {
+    const RenderList = ({ item }) => {
         return <TodoList list={item} />
     }
     const handleGoTo = (screen) => {
@@ -36,31 +37,49 @@ const Home = ({navigation}) => {
 
                     <Text style={styles.textHead}>Todo</Text>
 
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{ flexDirection: "row",marginTop:hp('-1%') }}>
                         <View>
 
                             <TouchableOpacity style={styles.iconS} onPress={() => handleGoTo('Surat')}>
-                                <ButtonIcon title=" "/>
+                                <View style={{alignItems:"center"}}>
+
+                                <IconLetter />
+                                <Text style={styles.txtI}>Surat</Text>
+                                </View>
                             </TouchableOpacity>
                         </View>
                         <View>
                             <TouchableOpacity style={styles.iconN} onPress={() => handleGoTo('Notifikasi')}>
-                                <ButtonIcon title=""/>
+                                <View style={{alignItems:"center"}}>
+
+                                <IconNotif />
+                                <Text style={styles.txtI}>Notifikasi</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View>
+                            <TouchableOpacity style={styles.iconL} >
+                                <View style={{alignItems:"center"}}>
+
+                                <IconLogout />
+                                <Text style={styles.txtI}>Log Out</Text>
+                                </View>
                             </TouchableOpacity>
                         </View>
                     </View>
 
                 </View>
             </View>
-            
+
             <Modal
                 animationType="slide"
                 visible={modalVisible} >
-                <AddListModal backModal ={() => {
+                <AddListModal backModal={() => {
                     setModalVisible(false)
-                }}/>
+                }} />
             </Modal>
-            
+
             <View style={[styles.areaTitle, { flexDirection: "row" }]}>
 
                 <View style={styles.divider} />
@@ -73,17 +92,17 @@ const Home = ({navigation}) => {
             </View>
 
             <View style={{ marginVertical: hp('2%') }}>
-                <TouchableOpacity onPress={() => {setModalVisible(true)}}>
+                <TouchableOpacity onPress={() => { setModalVisible(true) }}>
                     <ButtonIcon title="Add List" />
                 </TouchableOpacity>
             </View>
 
-            <View style={{ height: hp('60%'), position: "relative" }}>
-                <FlatList data={getEvent} 
-                keyExtractor={item => item}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                renderItem={(item) => RenderList(item)}
+            <View style={{ height: hp('55%'), position: "relative" }}>
+                <FlatList data={getEvent}
+                    keyExtractor={item => item}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={(item) => RenderList(item)}
                 />
             </View>
         </View>
@@ -98,7 +117,7 @@ const styles = StyleSheet.create({
     },
     headerApp: {
         width: "100%",
-        height: hp('8%'),
+        height: hp('10%'),
         position: "absolute",
         top: hp('0%'),
         borderBottomLeftRadius: 8,
@@ -124,12 +143,22 @@ const styles = StyleSheet.create({
     },
     iconS: {
         marginVertical: hp('1.1%'),
-        paddingHorizontal:wp('3%')
+        paddingHorizontal:wp('2%')
 
     },
     iconN: {
         marginVertical: hp('1.1%'),
+        paddingHorizontal:wp('2')
+ 
 
+    },
+    iconL: {
+        marginVertical: hp('1.1%'),
+
+    },
+    txtI:{
+        color:white1,
+        fontFamily: "Poppins-SemiBold",
     },
     divider: {
         backgroundColor: colors.lightblue,
@@ -151,101 +180,5 @@ const styles = StyleSheet.create({
 });
 
 export default Home
-
-// export default class Home extends React.Component {
-//     state = {
-//         addTodoVisible: false,
-//         getNotifVisible: false
-//     };
-
-//     toggleAddTodoModal() {
-//         this.setState({ addTodoVisible: !this.state.addTodoVisible });
-//     }
-
-//     renderList = list => {
-//         return <TodoList list={list} />
-//     }
-
-
-//     render() {
-
-//         return (
-//             <View style={styles.container}>
-
-//                 <View style={[styles.headerApp, { backgroundColor: blue }]}>
-
-//                     <View style={[styles.areaHead, { flexDirection: "row", justifyContent: "space-between", marginHorizontal: wp('2.5%'), flex: 1 }]} >
-
-//                         <Text style={styles.textHead}>Todo</Text>
-
-//                         <View style={{ flexDirection: "row" }}>
-//                             <View>
-
-//                                 <TouchableOpacity style={styles.iconS}>
-
-//                                     <ButtonIcon title=" " />
-//                                 </TouchableOpacity>
-//                             </View>
-
-//                             <View>
-
-//                                 <TouchableOpacity style={styles.iconN}>
-
-
-//                                     <ButtonIcon title="" />
-//                                 </TouchableOpacity>
-//                             </View>
-//                         </View>
-
-//                     </View>
-//                 </View>
-
-
-//                 {/* modal add list todo */}
-//                 <Modal
-//                     animationType="slide"
-//                     visible={this.state.addTodoVisible}
-//                     onRequestClose={() => this.toggleAddTodoModal()} >
-
-//                     <AddListModal backModal={() => this.toggleAddTodoModal()} />
-//                 </Modal>
-
-
-//                 <View style={[styles.areaTitle, { flexDirection: "row" }]}>
-
-//                     <View style={styles.divider} />
-
-//                     <Text style={styles.title}>
-//                         Daftar <Text style={{ fontWeight: "300", color: colors.blue }}>Acara</Text>
-//                     </Text>
-
-//                     <View style={styles.divider} />
-
-//                 </View>
-
-//                 <View style={{ marginVertical: hp('2%') }}>
-//                     <TouchableOpacity onPress={() => this.toggleAddTodoModal()} >
-//                         <ButtonIcon title="Add List" />
-//                     </TouchableOpacity>
-//                 </View>
-
-                // <View style={{ height: hp('60%'), position: "relative" }}>
-
-                //     <FlatList
-                //         data={tempData}
-                //         keyExtractor={item => item.name}
-                //         horizontal={true}
-                //         showsHorizontalScrollIndicator={false}
-                //         renderItem={({ item }) =>
-
-                //             this.renderList(item)}
-                //     />
-                // </View>
-//             </View>
-//         );
-//     }
-// }
-
-
 
 

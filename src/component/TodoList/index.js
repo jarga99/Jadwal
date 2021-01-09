@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginHorizontal:wp('2%'),
         alignItems: "center",
-        width:wp('85%'),
-        height:hp('60%')
+        width:wp('75%'),
+        height:hp('55%')
     },
     listWaktu:{
         fontSize:hp('3%'),
