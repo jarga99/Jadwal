@@ -1,18 +1,33 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import storage from '@react-native-firebase/storage';
+import RNFetchBlob from 'rn-fetch-blob'
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import { grey2,grey3, grey4, red } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const NotifAktif = (props) => {
-
+    
+    const DoDownload = async (filename) => {
+        let dirs = RNFetchBlob.fs.dirs
+        const url = await storage().ref(filename).getDownloadURL()
+        const type = await (await storage().ref(filename).getMetadata()).contentType
+        RNFetchBlob.config({
+            fileCache : true,
+            path:dirs.DocumentDir+"/"+filename+"."+type
+        }).fetch("GET",url)
+        .then(res => {
+         console.log(res.path());
+        })
+        .catch(err => {console.log(err)})
+    }
     return (
         <View style={{marginBottom:10}}>
-            <TouchableOpacity style={[styles.NotiF, { backgroundColor: grey3 }]} >
+            <TouchableOpacity style={[styles.NotiF, { backgroundColor: grey3 }]} onPress={() => DoDownload(props.list.file_surat)} >
                 <View style={{ flexDirection: "column" }} >
                     <View style={{ flexDirection: "row" }}>
                         <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Jenis: {props.list.jenis_surat}</Text>
                     </View>
-                    <Text style={styles.isi}>Nama Surat: {props.list.file_surat}</Text>
+                    <Text style={styles.isi}>Nama: {props.list.file_surat}</Text>
                 </View>
             </TouchableOpacity>
         </View>

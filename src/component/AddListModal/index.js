@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import SharedPreferences from 'react-native-shared-preferences'
 import storage from '@react-native-firebase/storage';
 import DocumentPicker from 'react-native-document-picker';
-import RNPickerSelect from 'react-native-picker-select';
+
+// Package penggunaan Select item
+// import { Picker } from '@react-native-picker/picker';
 import { Text, StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native'
 import colors from '../../utils/Colors'
 import { IconBack } from '../../assets'
@@ -11,6 +13,7 @@ import { grey4, green, white1, blue } from '../../utils/constan';
 import database from '@react-native-firebase/database';
 
 const AddListModal = (props) => {
+    const [getPicker, setPicker] = useState("")
 
     backgroundColors = ["#5CD859", "#24A6D9", "#595BD9", "#8022D9", "#D159D8", "#D85963", "#D88559"];
 
@@ -126,19 +129,27 @@ const AddListModal = (props) => {
 
                     <View style={{ flexDirection: "row", justifyContent: "space-between", flex: 1 }}>
                         <View>
-                            <RNPickerSelect
-                                onValueChange={(value) => console.log(value)}
-                                items={[
-                                    { label: 'Senin', value: 'Senin' },
-                                    { label: 'Selasa', value: 'Selasa' },
-                                    { label: 'Rabu', value: 'Rabu' },
-                                    { label: 'Kamis', value: 'Kamis' },
-                                    { label: 'Jumat', value: 'Jumat' },
-                                    { label: 'Sabtu', value: 'Sabtu' },
-                                    { label: 'Minggu', value: 'Minggu'}
-                                ]}
-                            />
+                            <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Hari</Text>
+                            <TextInput style={styles.hari} onChangeText={text => setHari(text)} />
+
+                            {/* Jika ingin menggukan Select Item */}
+                            {/* <Picker
+                                selectedValue={getPicker}
+                                style={styles.hari}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    setPicker(itemValue)
+                                    // console.log(itemValue)
+                                }>
+                                <Picker.Item label="Senin" value="senin" />
+                                <Picker.Item label="Selasa" value="selasa" />
+                                <Picker.Item label="Rabu" value="Rabu" />
+                                <Picker.Item label="Kamis" value="Kamis" />
+                                <Picker.Item label="Jum'at" value="jum'at" />
+                                <Picker.Item label="Sabtu" value="Sabtu" />
+                                <Picker.Item label="Minggu" value="Minggu" />
+                            </Picker> */}
                         </View>
+
                         <View>
                             <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Tanggal</Text>
                             <TextInput style={styles.tanggal} onChangeText={text => setTanggal(text)} />
@@ -226,7 +237,7 @@ const styles = StyleSheet.create({
         borderColor: colors.blue,
         borderRadius: 6,
         marginTop: hp('0.2%'),
-        width: wp('22%'),
+        width: wp('23%'),
         fontSize: hp('3%'),
     },
     tanggal: {
@@ -243,7 +254,7 @@ const styles = StyleSheet.create({
         borderColor: colors.blue,
         borderRadius: 6,
         marginTop: hp('0.2%'),
-        width: wp('22%'),
+        width: wp('25%'),
         paddingHorizontal: wp('1%'),
         fontSize: hp('3%')
     },

@@ -37,7 +37,7 @@ const Home = ({ navigation }) => {
 
                     <Text style={styles.textHead}>Todo</Text>
 
-                    <View style={{ flexDirection: "row",marginTop:hp('-1%') }}>
+                    <View style={{ flexDirection: "row",alignSelf:"center" }}>
                         <View>
 
                             <TouchableOpacity style={styles.iconS} onPress={() => handleGoTo('Surat')}>
@@ -138,8 +138,9 @@ const styles = StyleSheet.create({
     },
     textHead: {
         color: white,
-        fontSize: 36,
+        fontSize: hp('6%'),
         fontFamily: "Poppins-SemiBold",
+        alignSelf:"center"
     },
     iconS: {
         marginVertical: hp('1.1%'),

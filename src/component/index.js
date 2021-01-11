@@ -8,6 +8,7 @@ import NotifAktif from './NotifAktif'
 import Notifsurat from './NotifSurat'
 import Disposisi from './Disposisi'
 import EditJadwal from './EditJadwal'
+import HeaderApp from './HeaderApp'
 
 export { 
     ButtonAksi,
@@ -19,6 +20,6 @@ export {
     Notifsurat,
     UploadSurat,
     Disposisi,
-    EditJadwal
-
+    EditJadwal,
+    HeaderApp
  }

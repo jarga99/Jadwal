@@ -1,11 +1,12 @@
-import React,{useState} from 'react'
+import React,{Component} from 'react'
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import colors from '../../utils/Colors'
 import {grey1, grey2, white1 } from '../../utils/constan'
 import TodoModal from '../TodoModal'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-export default class TodoList extends React.Component {
+
+export default class TodoList extends Component {
 
     state = {
         showListVariable: false
@@ -48,6 +49,7 @@ export default class TodoList extends React.Component {
                 </View>
             </View>
         </TouchableOpacity>
+        
         </View>
     );
    }

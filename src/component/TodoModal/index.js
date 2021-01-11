@@ -6,6 +6,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { ScrollView } from 'react-native-gesture-handler';
 
 const TodoModal = (props) => {
+
     const [modalVisible, setModalVisible] = useState(false)
     const [getStateModalEdit, setModalEdit] = useState(false)
     const [getHari, setHari] = useState("")
@@ -15,6 +16,7 @@ const TodoModal = (props) => {
     const [getAcara, setAcara] = useState("")
     const [getKeterangan, setKeterangan] = useState("")
     const [getColor, setColor] = useState("")
+    
     useEffect(() => {
         setAcara(props.list.acara)
         setHari(props.list.hari)
@@ -27,8 +29,9 @@ const TodoModal = (props) => {
     }, [])
 
     const handleGoTo = (screen) => {
-        props.navigation.navigate(screen);
+        navigation.navigate(screen);
     };
+
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={{ position: "absolute", top: hp('2.5%'), right: wp('4%'), zIndex: 10 }} onPress={props.backModal}>
@@ -73,7 +76,7 @@ const TodoModal = (props) => {
                 <TouchableOpacity style={{ marginHorizontal: wp('2%') }}>
                     <ButtonIcon title="Hapus" />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginHorizontal: wp('2%') }} onPress={() => handleGoTo('Disposisi')}>
+                <TouchableOpacity style={{ marginHorizontal: wp('2%') }} onPress={() => handleGoTo('EditJadwal') }>
                     <ButtonIcon title="Disposisi" />
                 </TouchableOpacity>
             </View>
