@@ -4,7 +4,10 @@ import WelcomeAuth from './WelcomeAuth'
 import Splash from './Splash'
 import Home from './Home/'
 import Notifikasi from './Notifikasi'
+import Disposisi from './Disposisi'
+import EditJadwal from './EditJadwal'
 import Surat from './Surat'
+import TodoDetail from './TodoDetail'
 
 export  {
     Login,
@@ -13,5 +16,8 @@ export  {
     Splash,
     Home,
     Notifikasi,
-    Surat
+    Surat,
+    Disposisi,
+    EditJadwal,
+    TodoDetail,
 }

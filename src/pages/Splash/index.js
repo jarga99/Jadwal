@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     img: {
-        width: wp('60%'),
-        height: hp('30%'),
-        borderRadius: wp('50%'),
+        width: wp('40%'),
+        height: hp('20%'),
+        borderRadius: wp('100%'),
         borderWidth: 4,
         borderColor: blue
     },

@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import database from '@react-native-firebase/database';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Notifsurat } from '../../component';
@@ -8,7 +8,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { IconLetter, IconLogout, IconNotif } from '../../assets/index.js';
 
 
-const Surat = ({navigation}) => {
+const Surat = ({ navigation }) => {
 
 
     const [getSurat, setSurat] = useState("")
@@ -24,12 +24,12 @@ const Surat = ({navigation}) => {
         })
     }, [])
 
-    const RenderListSurat = ({item}) => {
-        return <Notifsurat list={item}/>
+    const RenderListSurat = ({ item }) => {
+        return <Notifsurat list={item} />
     }
 
     const handleGoTo = (screen) => {
-    navigation.navigate(screen);
+        navigation.navigate(screen);
     };
 
     return (
@@ -41,33 +41,33 @@ const Surat = ({navigation}) => {
 
                     <Text style={styles.textHead}>Todo</Text>
 
-                    <View style={{ flexDirection: "row",marginTop:hp('-1%') }}>
+                    <View style={{ flexDirection: "row", alignSelf: "center" }}>
                         <View>
 
                             <TouchableOpacity style={styles.iconS} onPress={() => handleGoTo('Surat')}>
-                                <View style={{alignItems:"center"}}>
+                                <View style={{ alignItems: "center" }}>
 
-                                <IconLetter />
-                                <Text style={styles.txtI}>Surat</Text>
+                                    <IconLetter />
+                                    <Text style={styles.txtI}>Surat</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
                         <View>
                             <TouchableOpacity style={styles.iconN} onPress={() => handleGoTo('Notifikasi')}>
-                                <View style={{alignItems:"center"}}>
+                                <View style={{ alignItems: "center" }}>
 
-                                <IconNotif />
-                                <Text style={styles.txtI}>Notifikasi</Text>
+                                    <IconNotif />
+                                    <Text style={styles.txtI}>Notifikasi</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
 
                         <View>
                             <TouchableOpacity style={styles.iconL} >
-                                <View style={{alignItems:"center"}}>
+                                <View style={{ alignItems: "center" }}>
 
-                                <IconLogout />
-                                <Text style={styles.txtI}>Log Out</Text>
+                                    <IconLogout />
+                                    <Text style={styles.txtI}>Log Out</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -90,10 +90,10 @@ const Surat = ({navigation}) => {
             </View>
 
             <FlatList data={getSurat}
-            keyExtractor={items => console.log(items)}
-            horizontal={false}
-            showsVerticalScrollIndicator={true}
-            renderItem={(item) => RenderListSurat(item)}
+                keyExtractor={items => console.log(items)}
+                horizontal={false}
+                showsVerticalScrollIndicator={true}
+                renderItem={(item) => RenderListSurat(item)}
             />
 
         </View>
@@ -129,8 +129,9 @@ const styles = StyleSheet.create({
     },
     textHead: {
         color: white,
-        fontSize: 36,
+        fontSize: hp('6%'),
         fontFamily: "Poppins-SemiBold",
+        alignSelf:"center"
     },
     iconS: {
         marginVertical: hp('1.1%'),

@@ -1,31 +1,18 @@
-import React,{Component} from 'react'
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React,{useState} from 'react'
+import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import colors from '../../utils/Colors'
 import {grey1, grey2, white1 } from '../../utils/constan'
-import TodoModal from '../TodoModal'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
-export default class TodoList extends Component {
+const TodoList = () => {
 
-    state = {
-        showListVariable: false
-    }
+const [list = props.list]=(useState)
 
-    toggleListModal(){
-        this.setState({showListVariable: !this.state.showListVariable})
-    }
-
-   render(){
-    const list = this.props.list
+    
     return(
         <View style={{flexDirection:"column"}}>
-            <Modal animationType="slide" visible={this.state.showListVariable} onRequestClose={() => this.toggleListModal()}>
-
-            <TodoModal list={list} backModal={() => this.toggleListModal()} />    
-  
-            </Modal>
-        <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => this.toggleListModal()}>
+        <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => handleGoTo('TodoDetail')}>
         
             <Text style={styles.listWaktu} numberOfLines={1}>
                 {list.hari} {list.tanggal} <Text style={{color:grey2}}>{list.jam}</Text>
@@ -52,7 +39,6 @@ export default class TodoList extends Component {
         
         </View>
     );
-   }
    
    
 };
@@ -97,5 +83,5 @@ const styles = StyleSheet.create({
         paddingHorizontal:wp('43%')
     }
 })
-
+export default TodoList
 

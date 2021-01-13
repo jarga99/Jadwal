@@ -22,6 +22,7 @@ const Home = ({ navigation }) => {
         })
     }, [])
     const RenderList = ({ item }) => {
+        console.log(item);
         return <TodoList list={item} />
     }
     const handleGoTo = (screen) => {

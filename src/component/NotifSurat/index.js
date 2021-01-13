@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import { grey2,grey3, grey4, red } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const NotifAktif = (props) => {
+const NotifSurat = (props) => {
     
     const DoDownload = async (filename) => {
         let dirs = RNFetchBlob.fs.dirs
@@ -34,7 +34,7 @@ const NotifAktif = (props) => {
     )
 }
 
-export default NotifAktif
+export default NotifSurat
 
 const styles = StyleSheet.create({
     NotiF: {

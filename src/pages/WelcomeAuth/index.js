@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     img:{
         width:wp('60%'),
         height:hp('30%'),
-        borderRadius:wp('50%'),
+        borderRadius:wp('100%'),
         borderWidth:3,
         borderColor:blue
     }
