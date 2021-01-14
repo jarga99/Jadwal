@@ -9,6 +9,7 @@ import IconHapus from './hapus.svg';
 import IconEdit from './edit.svg';
 import IconDisposisi from './disposisi.svg';
 import IconLogout from './logout.svg';
+import IconCalendar from './calendar.svg'
 
 
 export {
@@ -22,5 +23,6 @@ export {
     IconClose,
     IconDisposisi,
     IconHapus,
-    IconEdit
+    IconEdit,
+    IconCalendar
 }

@@ -5,18 +5,19 @@ import DocumentPicker from 'react-native-document-picker';
 
 // Package penggunaan Select item
 // import { Picker } from '@react-native-picker/picker';
-import { Text, StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Text, StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, TextInput, ScrollView, Alert, Button } from 'react-native'
 import colors from '../../utils/Colors'
-import { IconBack } from '../../assets'
+import { IconBack,IconCalendar, IconNotif } from '../../assets'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { grey4, green, white1, blue } from '../../utils/constan';
+import { grey4, green, white1, blue, grey0, grey2 } from '../../utils/constan';
 import database from '@react-native-firebase/database';
 
 const AddListModal = (props) => {
-    const [getPicker, setPicker] = useState("")
+    // const [getPicker, setPicker] = useState("")
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     backgroundColors = ["#5CD859", "#24A6D9", "#595BD9", "#8022D9", "#D159D8", "#D85963", "#D88559"];
-
     const [user_info, setUserInfo] = useState({ user_id: "", username: "" })
     const [getHari, setHari] = useState("")
     const [getTanggal, setTanggal] = useState("")
@@ -39,6 +40,37 @@ const AddListModal = (props) => {
             })
         })
     }, [])
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+     
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        // Mengambil nilai jam
+        var hours = date.getHours();
+        // Mengambil nilai menit
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        // Time format
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        var dateTime = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
+        // Nama-nama Hari
+        const days = ['Senin','Selasa','Rabu','Kamis','Jum`at','Sabtu','Minggu']
+        const dayName = days[date.getDay()]
+        if (dayName || dateTime || strTime != null){
+            setJam(strTime)
+            setTanggal(dateTime)
+            setHari(dayName)
+        }
+        hideDatePicker();
+    };
 
     const CreateTodo = async () => {
         try {
@@ -126,37 +158,33 @@ const AddListModal = (props) => {
 
                 <View style={{ alignSelf: "stretch", marginHorizontal: wp('5%') }}>
                     <Text style={styles.title}>Input data Jadwal</Text>
-
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="datetime" 
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}/>
                     <View style={{ flexDirection: "row", justifyContent: "space-between", flex: 1 }}>
+                       
+                        <View style={styles.VCalender}>
+                        <TouchableOpacity  onPress={() => showDatePicker()}>
+                           
+                            <IconCalendar />
+                            
+                        </TouchableOpacity>
+
+                        </View>
                         <View>
                             <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Hari</Text>
-                            <TextInput style={styles.hari} onChangeText={text => setHari(text)} />
-
-                            {/* Jika ingin menggukan Select Item */}
-                            {/* <Picker
-                                selectedValue={getPicker}
-                                style={styles.hari}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    setPicker(itemValue)
-                                    // console.log(itemValue)
-                                }>
-                                <Picker.Item label="Senin" value="senin" />
-                                <Picker.Item label="Selasa" value="selasa" />
-                                <Picker.Item label="Rabu" value="Rabu" />
-                                <Picker.Item label="Kamis" value="Kamis" />
-                                <Picker.Item label="Jum'at" value="jum'at" />
-                                <Picker.Item label="Sabtu" value="Sabtu" />
-                                <Picker.Item label="Minggu" value="Minggu" />
-                            </Picker> */}
+                            <TextInput style={styles.hari} editable={false} value={getHari} />
                         </View>
 
                         <View>
                             <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Tanggal</Text>
-                            <TextInput style={styles.tanggal} onChangeText={text => setTanggal(text)} />
+                            <TextInput style={styles.tanggal} editable={false} value={getTanggal} />
                         </View>
                         <View>
                             <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Jam</Text>
-                            <TextInput style={styles.jam} onChangeText={text => setJam(text)} />
+                            <TextInput style={styles.jam} editable={false} value={getJam}/>
                         </View>
 
                     </View>
@@ -232,6 +260,13 @@ const styles = StyleSheet.create({
         marginTop: hp('4%'),
         marginBottom: hp('4%')
     },
+    VCalender:{
+        justifyContent:"space-between",
+        height: 60,
+        width:55,
+        backgroundColor:green,
+        top:hp('5.4%')
+    },
     hari: {
         borderWidth: StyleSheet.hairlineWidth,
         borderColor: colors.blue,
@@ -245,7 +280,7 @@ const styles = StyleSheet.create({
         borderColor: colors.blue,
         borderRadius: 6,
         marginTop: hp('0.2%'),
-        width: wp('40%'),
+        width: wp('30%'),
         paddingHorizontal: wp('1%'),
         fontSize: hp('3%')
     },

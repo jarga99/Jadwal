@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal, Alert } from 'react-native';
 import SharedPreferences from 'react-native-shared-preferences'
 import colors from '../../utils/Colors.js';
 import { AddListModal, ButtonIcon, TodoList } from '../../component';
@@ -59,7 +59,22 @@ const Home = ({ navigation }) => {
                         </View>
 
                         <View>
-                            <TouchableOpacity style={styles.iconL} >
+                            <TouchableOpacity style={styles.iconL} onPress={() =>{
+                                Alert.alert("Logout","",[
+                                    {
+                                        text:"Oke",
+                                        onPress: () => {
+                                            SharedPreferences.getItem("user_id",(val) => {
+                                                if (val != null) {
+                                                    console.log("RUn");
+                                                    SharedPreferences.removeItem("user_id")
+                                                    navigation.replace("Login")
+                                                }
+                                            })
+                                        }
+                                    }
+                                ])
+                            }}>
                                 <View style={{alignItems:"center"}}>
 
                                 <IconLogout />
