@@ -1,86 +1,97 @@
-import React,{useState} from 'react'
-import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import colors from '../../utils/Colors'
-import {grey1, grey2, white1 } from '../../utils/constan'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { grey1, grey2, white1 } from '../../utils/constan'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
-const TodoList = () => {
+const TodoList = (props) => {
 
-const [list = props.list]=(useState)
+    // function pindah halaman jika ada komponen lain dan params (mengirim value ke screen lain)
+    const _useNavigation = useNavigation()
+    const handleGoTo = (screen) => {
+        _useNavigation.navigate(screen,{
+                       
+            hari:props.list.hari,
+            tanggal:props.list.tanggal,
+            jam:props.list.jam,
+            tempat:props.list.tempat,
+            acara:props.list.acara,
+            keterangan:props.list.keterangan,
+            color:props.list.color
+        })
+    }
+    return (
+        <View style={{ flexDirection: "column" }}>
+            <TouchableOpacity style={[styles.listContainer, { backgroundColor: props.list.color }]} onPress={() => handleGoTo('TodoDetail','11')}>
 
-    
-    return(
-        <View style={{flexDirection:"column"}}>
-        <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => handleGoTo('TodoDetail')}>
-        
-            <Text style={styles.listWaktu} numberOfLines={1}>
-                {list.hari} {list.tanggal} <Text style={{color:grey2}}>{list.jam}</Text>
-            </Text>
-            <View style={styles.divider} />
-            <View>
-                <View style ={{alignItems:"center"}}>
-                    <Text style={styles.tempat}>{list.tempat}</Text>
+                <Text style={styles.listWaktu} numberOfLines={1}>
+                    {props.list.hari} {props.list.tanggal} <Text style={{ color: grey2 }}>{props.list.jam}</Text>
+                </Text>
+                <View style={styles.divider} />
+                <View>
+                    <View style={{ alignItems: "center" }}>
+                        <Text style={styles.tempat}>{props.list.tempat}</Text>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.divider} />
-            <View>
-                <View style ={{alignItems:"center"}}>
-                    <Text style={styles.acara}>{list.acara}</Text>
+                <View style={styles.divider} />
+                <View>
+                    <View style={{ alignItems: "center" }}>
+                        <Text style={styles.acara}>{props.list.acara}</Text>
+                    </View>
                 </View>
-            </View>
-            <View style={styles.divider} />
-            <View>
-                <View style ={{alignItems:"center"}}>
-                    <Text style={styles.keterangan}>{list.keterangan}</Text>
+                <View style={styles.divider} />
+                <View>
+                    <View style={{ alignItems: "center" }}>
+                        <Text style={styles.keterangan}>{props.list.keterangan}</Text>
+                    </View>
                 </View>
-            </View>
-        </TouchableOpacity>
-        
+            </TouchableOpacity>
+
         </View>
     );
-   
-   
+
 };
 
-
 const styles = StyleSheet.create({
-    listContainer:{
+    listContainer: {
         paddingVertical: hp('2%'),
-        paddingHorizontal:wp('2%'),
+        paddingHorizontal: wp('2%'),
         borderRadius: 10,
-        marginHorizontal:wp('2%'),
+        marginHorizontal: wp('2%'),
         alignItems: "center",
-        width:wp('75%'),
-        height:hp('55%')
+        width: wp('85%'),
+        height: hp('55%')
     },
-    listWaktu:{
-        fontSize:hp('3%'),
-        height:hp('5%'),
+    listWaktu: {
+        fontSize: 20,
+        height: hp('5%'),
         color: colors.white,
-        flexDirection:"row",
-        textTransform:"uppercase",
+        flexDirection: "row",
+        textTransform: "uppercase",
     },
-    tempat:{
-        fontSize:hp('3%'),
-        textTransform:"uppercase",
-        textAlign:"center",
-        color: grey1
+    tempat: {
+        fontSize: 24,
+        textTransform: "uppercase",
+        textAlign: "center",
+        color: grey1,
+        marginVertical:2
     },
     acara: {
         fontSize: hp('2.8%'),
-        height:hp('35%'),
+        height: hp('35%'),
         color: colors.white
     },
-    keterangan:{
+    keterangan: {
         fontSize: hp('2.8%'),
-        height:hp('35%'),
+        height: hp('35%'),
         color: colors.white
     },
     divider: {
         backgroundColor: white1,
         height: hp('0.2%'),
-        paddingHorizontal:wp('43%')
+        paddingHorizontal: wp('43%')
     }
 })
 export default TodoList

@@ -1,51 +1,53 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, TouchableOpacity, SafeAreaView, View, Text,ScrollView } from 'react-native'
+import React from 'react'
+import { useNavigation} from '@react-navigation/native'
+import { StyleSheet, TouchableOpacity, SafeAreaView, View, Text, ScrollView,Alert } from 'react-native'
 import { ButtonIcon } from '../../component';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const TodoDetail = (props) => {
-    const [getHari, setHari] = useState("")
-    const [getTanggal, setTanggal] = useState("")
-    const [getJam, setJam] = useState("")
-    const [getTempat, setTempat] = useState("")
-    const [getAcara, setAcara] = useState("")
-    const [getKeterangan, setKeterangan] = useState("")
-    const [getColor, setColor] = useState("")
-    
-    useEffect(() => {
-        setAcara(props.list.acara)
-        setHari(props.list.hari)
-        setTanggal(props.list.tanggal)
-        setJam(props.list.jam)
-        setTempat(props.list.tempat)
-        setAcara(props.list.acara)
-        setKeterangan(props.list.keterangan)
-        setColor(props.list.color)
-    }, [])
 
+const deleteData = ()=>
+    Alert.alert(
+        "Alert Title",
+        "My Alert Msg",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
+
+    // function pindah halaman jika ada komponen lain dan params (menerima value ke screen lain)
+    const _useNavigation = useNavigation()
     const handleToGo = (screen) => {
-        navigation.navigate(screen)
+        _useNavigation.navigate(screen)
     }
+    const { hari, tanggal, jam, tempat, acara, keterangan,color } = props.route.params
+
 
     return (
         <SafeAreaView style={styles.container}>
 
-            <View style={[styles.section, styles.header, { borderBottomColor: getColor }]} >
+            <View style={[styles.section, styles.header, { borderBottomColor: color }]} >
 
                 <View style={{ flexDirection: "row" }}>
 
-                    <Text style={styles.waktu}>{getHari} </Text>
-                    <Text style={styles.waktu}>{getTanggal} </Text>
-                    <Text style={styles.waktu}>{getJam}</Text>
+                    <Text style={styles.waktu}>{hari} </Text>
+                    <Text style={styles.waktu}>{tanggal} </Text>
+                    <Text style={styles.waktu}>{jam}</Text>
                 </View>
-                                                        
+
             </View>
             <ScrollView>
 
                 <View style={[styles.section, styles.conten]}>
-                    <Text style={[styles.tempat, styles.Todocontainer]}>{getTempat}</Text>
-                    <Text style={[styles.acara, styles.Todocontainer]}>{getAcara}</Text>
-                    <Text style={[styles.keterangan, styles.Todocontainer]}>{getKeterangan}</Text>
+                    <Text style={[styles.tempat, styles.Todocontainer]}>{tempat}</Text>
+                    <Text style={[styles.acara, styles.Todocontainer]}>{acara}</Text>
+                    <Text style={[styles.keterangan, styles.Todocontainer]}>{keterangan}</Text>
                 </View>
             </ScrollView>
 
@@ -53,10 +55,10 @@ const TodoDetail = (props) => {
                 <TouchableOpacity style={{ marginHorizontal: wp('5%') }} onPress={() => handleToGo('EditJadwal')}>
                     <ButtonIcon title="Edit" />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginHorizontal: wp('2%') }}>
+                <TouchableOpacity style={{ marginHorizontal: wp('2%') }} onPress={deleteData}>
                     <ButtonIcon title="Hapus" />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginHorizontal: wp('2%') }} onPress={() => handleToGo('Disposisi') }>
+                <TouchableOpacity style={{ marginHorizontal: wp('2%') }} onPress={() => handleToGo('Disposisi')}>
                     <ButtonIcon title="Disposisi" />
                 </TouchableOpacity>
             </View>
@@ -118,4 +120,3 @@ const styles = StyleSheet.create({
     }
 });
 export default TodoDetail
-
