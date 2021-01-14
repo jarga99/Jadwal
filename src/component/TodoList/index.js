@@ -1,38 +1,45 @@
 import React,{useState} from 'react'
+import { useNavigation } from '@react-navigation/native';
 import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import colors from '../../utils/Colors'
 import {grey1, grey2, white1 } from '../../utils/constan'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
+const TodoList = (props) => { 
 
-const TodoList = () => {
-
-const [list = props.list]=(useState)
-
+    /*
+    Access the navigation prop from any component
+    https://reactnavigation.org/docs/connecting-navigation-prop
+    */
+    const _useNavigation = useNavigation()
     
+    const handleToGo = (screen) => {
+        _useNavigation.navigate(screen)
+    }
+
     return(
         <View style={{flexDirection:"column"}}>
-        <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} onPress={() => handleGoTo('TodoDetail')}>
+        <TouchableOpacity style={[styles.listContainer, { backgroundColor: props.list.color }]} onPress={() => handleToGo('TodoDetail')}>
         
             <Text style={styles.listWaktu} numberOfLines={1}>
-                {list.hari} {list.tanggal} <Text style={{color:grey2}}>{list.jam}</Text>
+                {props.list.hari} {props.list.tanggal} <Text style={{color:grey2}}>{props.list.jam}</Text>
             </Text>
             <View style={styles.divider} />
             <View>
                 <View style ={{alignItems:"center"}}>
-                    <Text style={styles.tempat}>{list.tempat}</Text>
+                    <Text style={styles.tempat}>{props.list.tempat}</Text>
                 </View>
             </View>
             <View style={styles.divider} />
             <View>
                 <View style ={{alignItems:"center"}}>
-                    <Text style={styles.acara}>{list.acara}</Text>
+                    <Text style={styles.acara}>{props.list.acara}</Text>
                 </View>
             </View>
             <View style={styles.divider} />
             <View>
                 <View style ={{alignItems:"center"}}>
-                    <Text style={styles.keterangan}>{list.keterangan}</Text>
+                    <Text style={styles.keterangan}>{props.list.keterangan}</Text>
                 </View>
             </View>
         </TouchableOpacity>

@@ -22,8 +22,7 @@ const Home = ({ navigation }) => {
         })
     }, [])
     const RenderList = ({ item }) => {
-        console.log(item);
-        return <TodoList list={item} />
+        return <TodoList list={item}/>
     }
     const handleGoTo = (screen) => {
         navigation.navigate(screen);
@@ -100,7 +99,7 @@ const Home = ({ navigation }) => {
 
             <View style={{ height: hp('55%'), position: "relative" }}>
                 <FlatList data={getEvent}
-                    keyExtractor={item => item}
+                    keyExtractor={item => item.jam}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     renderItem={(item) => RenderList(item)}

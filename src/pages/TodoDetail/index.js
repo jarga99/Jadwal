@@ -4,6 +4,7 @@ import { ButtonIcon } from '../../component';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const TodoDetail = (props) => {
+    
     const [getHari, setHari] = useState("")
     const [getTanggal, setTanggal] = useState("")
     const [getJam, setJam] = useState("")
