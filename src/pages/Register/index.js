@@ -1,56 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   KeyboardAvoidingView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import database from '@react-native-firebase/database';
-import { blue,white,grey0,grey1 } from '../../utils/constan'
+import DropDownPicker from 'react-native-dropdown-picker';
+import { blue, white, grey0, grey1, green } from '../../utils/constan'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
-import { ScrollView } from 'react-native-gesture-handler';
 
-export default class Login extends React.Component {
+const Register = () => {
 
-  state = {
-    nama: "",
-    jabatan: "",
-    username: "",
-    password: ""
+  // menggunakan select
+  const [getSelect] = useState("Pilih Jabatan")
 
-  };
+  const [getNama, setNama] = useState("")
+  const [getJabatan, setJabatan] = useState("")
+  const [getUsername, setUsername] = useState("")
+  const [getPassword, setPassword] = useState("")
 
-  LoginApp = () => {
-    const { nama, jabatan, username, password } = this.state
+  // export default class Login extends React.Component {
+
+  //   state = {
+  //     nama: "",
+  //     jabatan: "",
+  //     username: "",
+  //     password: ""
+
+  //   };
+
+  const RegisterApp = () => {
+
     const uuid = new Date().getTime()
-    // tempData.push({
-    //   username,
-    //   password
 
-    // });
     const data = database().ref('/users/' + uuid)
     data.set({
       id: uuid,
-      nama: nama,
-      jabatan: jabatan,
-      username: username,
-      password: password,
+      nama: getNama,
+      jabatan: getJabatan,
+      username: getUsername,
+      password: getPassword,
     }).then(x => {
       console.log("Sukses");
     }).catch(err => {
       console.log(err);
     })
-    this.setState({ nama: "", jabatan: "", username: "", password: "" });
-
+    setNama("")
+    setJabatan("")
+    setUsername("")
+    setUsername("")
   }
-  render() {
-    return (
-      <ScrollView>
+  return (
+    <ScrollView>
 
       <KeyboardAvoidingView style={styles.container}>
 
@@ -62,23 +70,58 @@ export default class Login extends React.Component {
               <Text style={{ color: grey1, fontFamily: "Poppins-Regular", fontSize: hp('3%') }}>Nama</Text>
               <TextInput style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
                 placeholder="Isi nama"
-                onChangeText={text => this.setState({ nama: text })}>
+                onChangeText={text => setNama(text)}>
 
               </TextInput>
             </View>
             <View style={styles.inForm}>
               <Text style={{ color: grey1, fontFamily: "Poppins-Regular", fontSize: hp('3%') }}>Jabatan</Text>
-              <TextInput style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
+
+              <DropDownPicker
+                items={[
+                  // label pilih jabatan
+                  { label: 'Pilih Jabatan', value: 'Pilih Jabatan' },
+                  // label jabatan
+                  { label: 'Kadin Kominfo', value: 'Kadin Kominfo' },
+                  { label: 'Sekdin Kominfo', value: 'Sekdin Kominfo' },
+                  { label: 'Kabid EGOV', value: 'Kabid EGOV' },
+                  { label: 'Kabid PIKP', value: 'Kabid PIKP' },
+                  { label: 'Kabid TIK', value: 'Kabid TIK' },
+                ]}
+                defaultValue={getSelect}
+                containerStyle={{ height: hp('6.5%') }}
+                labelStyle={{
+                  fontSize: hp('2.5%'),
+                  textAlign: 'left',
+                  color: grey1
+                }}
+                style={{ backgroundColor: grey0, borderColor: blue, borderWidth: 2 }}
+                itemStyle={{
+                  justifyContent: 'flex-start'
+                }}
+                dropDownStyle={{ backgroundColor: white }}
+                activeLabelStyle={{ color: blue }}
+                selectedtLabelStyle={{
+                  color: '#39739d'
+                }}
+                onChangeItem={item => setJabatan({
+                  jabatan: item.value
+                })}
+                onChangeText={text => setJabatan(text)}
+              />
+
+
+              {/* <TextInput style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
                 placeholder="Isi jabatan"
                 onChangeText={text => this.setState({ jabatan: text })}>
 
-              </TextInput>
+              </TextInput> */}
             </View>
             <View style={styles.inForm}>
               <Text style={{ color: grey1, fontFamily: "Poppins-Regular", fontSize: hp('3%') }}>Username</Text>
               <TextInput style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
                 placeholder="Isi email"
-                onChangeText={text => this.setState({ username: text })}>
+                onChangeText={text => setUsername(text)}>
 
               </TextInput>
             </View>
@@ -86,17 +129,17 @@ export default class Login extends React.Component {
               <Text style={{ color: grey1, fontFamily: "Poppins-Regular", fontSize: hp('3%') }}>Password</Text>
               <TextInput secureTextEntry={true} style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
                 placeholder=" Isi password"
-                onChangeText={text => this.setState({ password: text })}>
+                onChangeText={text => setPassword(text)}>
               </TextInput>
             </View>
 
             <TouchableOpacity
-             style={[styles.input,{backgroundColor: blue}
-             ]}
-              onPress={this.LoginApp}>
+              style={[styles.input, { backgroundColor: blue }
+              ]}
+              onPress={RegisterApp}>
               <Text style={[styles.txtl,
-            { fontSize: hp('3%'), fontFamily: "Poppins-SemiBold" }
-            ]}>Register</Text>
+              { fontSize: hp('3%'), fontFamily: "Poppins-SemiBold" }
+              ]}>Register</Text>
             </TouchableOpacity>
           </View>
 
@@ -104,10 +147,10 @@ export default class Login extends React.Component {
 
 
       </KeyboardAvoidingView>
-      </ScrollView>
-    );
-  }
+    </ScrollView>
+  );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -141,5 +184,7 @@ const styles = StyleSheet.create({
     color: white,
     textAlign: "center",
     marginTop: 5
-  }
+  },
+
 })
+export default Register
