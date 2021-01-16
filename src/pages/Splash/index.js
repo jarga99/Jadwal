@@ -17,9 +17,9 @@ const Splash = ({ navigation }) => {
             SharedPreferences.getItem("user_id", (val) => {
                 console.log(val);
                 if (val != null) {
-                    navigation.replace("")
+                    navigation.replace("Home")
                 } else {
-                    navigation.replace('');
+                    navigation.replace("WelcomeAuth");
                 }
             })
 

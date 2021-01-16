@@ -1,9 +1,10 @@
 import React from 'react'
 import storage from '@react-native-firebase/storage';
 import RNFetchBlob from 'rn-fetch-blob'
-import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Button,Image} from 'react-native'
 import { grey2,grey3, grey4, red } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { ImgSplash, ImgTodo } from '../../assets/index.js';
 
 const NotifSurat = (props) => {
     
@@ -27,6 +28,7 @@ const NotifSurat = (props) => {
                     <View style={{ flexDirection: "row" }}>
                         <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Jenis: {props.list.jenis_surat}</Text>
                     </View>
+                    <Image style={styles.img} source={ImgTodo} />
                     <Text style={styles.isi}>Nama: {props.list.file_surat}</Text>
                 </View>
             </TouchableOpacity>
@@ -39,7 +41,7 @@ export default NotifSurat
 const styles = StyleSheet.create({
     NotiF: {
         width: wp('95%'),
-        height: hp('10%'),
+        height: hp('35%'),
         paddingHorizontal: wp('1%'),
         paddingVertical: wp('1%'),
         borderRadius: 10,
@@ -56,6 +58,11 @@ const styles = StyleSheet.create({
     txtHead: {
         fontSize: hp('2.7%'),
         fontFamily:"Poppins-SemiBold",
+    },
+    img:{
+        width:wp('92%'),
+        height:hp('25%'),
+        alignSelf:"center"
     },
     isi:{
         fontSize:hp('2.5%'),
