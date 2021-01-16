@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Text, StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { blue, green, grey4, white1 } from '../../utils/constan';
+import { blue, green, grey1, grey0, grey4, white, white1 } from '../../utils/constan';
 import database from '@react-native-firebase/database';
 
 
@@ -69,7 +69,7 @@ const UploadSurat = (props) => {
                             { label: 'Kabid TIK', value: 'Kabid TIK' },
                         ]}
                         defaultValue={getSelect}
-                        containerStyle={{ height: hp('6.5%') }}
+                        containerStyle={{ height: hp('7%') }}
                         labelStyle={{
                             fontSize: hp('2.5%'),
                             textAlign: 'left',
@@ -100,7 +100,7 @@ const UploadSurat = (props) => {
 
                 <View>
                     <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Nama</Text>
-                    <TextInput style={styles.jeniS} onChangeText={text => setJSurat(text)} />
+                    <TextInput style={styles.dN} onChangeText={text => setJSurat(text)} />
                 </View>
 
                 <TouchableOpacity style={[styles.create, { backgroundColor: green }]} >
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
 
-    jeniS: {
+    dN: {
         borderWidth: 2,
         borderColor: blue,
         borderRadius: 6,
