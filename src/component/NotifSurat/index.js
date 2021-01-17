@@ -1,12 +1,15 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import storage from '@react-native-firebase/storage';
 import RNFetchBlob from 'rn-fetch-blob'
-import { StyleSheet, Text, View, TouchableOpacity, Button,Image} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Button,Image,PermissionsAndroid} from 'react-native'
 import { grey2,grey3, grey4, red } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { ImgSplash, ImgTodo } from '../../assets/index.js';
 
 const NotifSurat = (props) => {
+    
+    const [state, setstate] = useState("")
+
     const requestCameraPermission = async () => {
         try {
           const granted = await PermissionsAndroid.request(
@@ -55,15 +58,15 @@ const NotifSurat = (props) => {
         })
         .catch(err => {console.log(err)})
     }
+    
     return (
         <View style={{marginBottom:10}}>
-            {/* <Button title="req" onPress={() => requestCameraPermission()}></Button> */}
             <TouchableOpacity style={[styles.NotiF, { backgroundColor: grey3 }]} onPress={() => DoDownload(props.list.file_surat)} >
                 <View style={{ flexDirection: "column" }} >
                     <View style={{ flexDirection: "row" }}>
                         <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Jenis: {props.list.jenis_surat}</Text>
                     </View>
-                    <Image style={styles.img} source={ImgTodo} />
+                    <Image style={styles.img} source={{uri:""}} />
                     <Text style={styles.isi}>Nama: {props.list.file_surat}</Text>
                 </View>
             </TouchableOpacity>

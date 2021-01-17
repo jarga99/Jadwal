@@ -25,7 +25,7 @@ const Surat = ({ navigation }) => {
     }, [])
 
     const RenderListSurat = ({ item }) => {
-        return <Notifsurat list={item} />
+        return <Notifsurat list={item}/>
     }
 
     const handleGoTo = (screen) => {

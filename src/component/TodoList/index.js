@@ -11,14 +11,14 @@ const TodoList = (props) => {
     const _useNavigation = useNavigation()
     const handleGoTo = (screen) => {
         _useNavigation.navigate(screen,{
-                       
             hari:props.list.hari,
             tanggal:props.list.tanggal,
             jam:props.list.jam,
             tempat:props.list.tempat,
             acara:props.list.acara,
             keterangan:props.list.keterangan,
-            color:props.list.color
+            color:props.list.color,
+            id:props.list.id
         })
     }
     return (

@@ -10,7 +10,7 @@ import { IconLetter, IconLogout, IconNotif } from '../../assets/index.js';
 
 const Home = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [getEvent, setEvent] = useState("")
+    const [getEvent, setEvent] = useState([])
     useEffect(() => {
         var arrData = []
         let datas = database().ref('/events/').once('value').then(snapshot => {
@@ -21,6 +21,7 @@ const Home = ({ navigation }) => {
             setEvent(arrData)
         })
     }, [])
+    
     const RenderList = ({ item }) => {
         return <TodoList list={item}/>
     }
@@ -114,7 +115,7 @@ const Home = ({ navigation }) => {
 
             <View style={{ height: hp('55%'), position: "relative" }}>
                 <FlatList data={getEvent}
-                    keyExtractor={item => item.jam}
+                    keyExtractor={item => item.id}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     renderItem={(item) => RenderList(item)}

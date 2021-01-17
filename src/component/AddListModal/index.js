@@ -112,6 +112,7 @@ const AddListModal = (props) => {
           email: user_info.username,
         },
         event_detail: {
+          id:eventId,
           hari: getHari,
           tanggal: getTanggal,
           jam: getJam,
