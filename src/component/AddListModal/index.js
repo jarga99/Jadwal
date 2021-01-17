@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import SharedPreferences from 'react-native-shared-preferences';
 import storage from '@react-native-firebase/storage';
 import DocumentPicker from 'react-native-document-picker';
@@ -15,16 +15,15 @@ import {
   TextInput,
   ScrollView,
   Alert,
-  Button,
   Image,
 } from 'react-native';
 import colors from '../../utils/Colors';
-import {IconBack, IconCalendar, IconNotif, ImgCalendar} from '../../assets';
+import { IconBack, ImgCalendar } from '../../assets';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {grey4, green, white1, blue, grey0, grey2, grey1} from '../../utils/constan';
+import { grey4, white1, blue,grey1 } from '../../utils/constan';
 import messaging from '@react-native-firebase/messaging';
 import database from '@react-native-firebase/database';
 
@@ -41,7 +40,7 @@ const AddListModal = (props) => {
     '#D85963',
     '#D88559',
   ];
-  const [user_info, setUserInfo] = useState({user_id: '', username: ''});
+  const [user_info, setUserInfo] = useState({ user_id: '', username: '' });
   const [getHari, setHari] = useState('');
   const [getTanggal, setTanggal] = useState('');
   const [getJam, setJam] = useState('');
@@ -135,13 +134,13 @@ const AddListModal = (props) => {
           Alert.alert(
             'Input Jadwal Berhasil',
             'Anda Berhasil Menambhakan Jadwal',
-            [{text: 'OK', onPress: () => props.backModal()}],
-            {cancelable: false},
+            [{ text: 'OK', onPress: () => props.backModal() }],
+            { cancelable: false },
           );
           messaging().sendMessage({
-              data:{
-                  title:getAcara
-              }
+            data: {
+              title: getAcara
+            }
           })
         });
 
@@ -152,7 +151,7 @@ const AddListModal = (props) => {
         console.log(snapshot);
       });
     } catch (error) {
-      Alert.alert('Gagal Input Jadwal', [{text: 'OK'}], {cancelable: false});
+      Alert.alert('Gagal Input Jadwal', [{ text: 'OK' }], { cancelable: false });
     }
   };
 
@@ -162,7 +161,7 @@ const AddListModal = (props) => {
         type: [DocumentPicker.types.allFiles],
       });
       if (res.uri != null) {
-        setFileMetaData({file_uri: res.uri, file_name: res.name});
+        setFileMetaData({ file_uri: res.uri, file_name: res.name });
       }
     } catch (error) {
       if (DocumentPicker.isCancel(error)) {
@@ -177,7 +176,7 @@ const AddListModal = (props) => {
       return (
         <TouchableOpacity
           key={color}
-          style={[styles.colorSelect, {backgroundColor: color}]}
+          style={[styles.colorSelect, { backgroundColor: color }]}
           onPress={() => setColor(color)}
         />
       );
@@ -186,7 +185,7 @@ const AddListModal = (props) => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <ScrollView style={{width: wp('100%')}}>
+      <ScrollView style={{ width: wp('100%') }}>
         <TouchableOpacity
           style={{
             position: 'absolute',
@@ -198,7 +197,7 @@ const AddListModal = (props) => {
           <IconBack title=" " />
         </TouchableOpacity>
 
-        <View style={{alignSelf: 'stretch', marginHorizontal: wp('5%')}}>
+        <View style={{ alignSelf: 'stretch', marginHorizontal: wp('5%') }}>
           <Text style={styles.title}>Input data Jadwal</Text>
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
@@ -304,7 +303,7 @@ const AddListModal = (props) => {
           </View>
 
           {/* area upload Surat */}
-          <View style={{alignSelf: 'stretch'}}>
+          <View style={{ alignSelf: 'stretch' }}>
             <View>
               <Text
                 style={{
@@ -328,7 +327,7 @@ const AddListModal = (props) => {
                 }}>
                 Tambah Surat
               </Text>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <TextInput
                   style={styles.upload}
                   value={getFileMetaData.file_name}
@@ -339,7 +338,7 @@ const AddListModal = (props) => {
                   <Text
                     style={[
                       styles.txtUp,
-                      {fontFamily: 'Poppins-SemiBold', fontSize: hp('3%')},
+                      { fontFamily: 'Poppins-SemiBold', fontSize: hp('3%') },
                     ]}>
                     Browse
                   </Text>
@@ -365,12 +364,12 @@ const AddListModal = (props) => {
               }}>
               Warna
             </Text>
-            <View style={{flexDirection: 'row'}}>{renderColors()}</View>
+            <View style={{ flexDirection: 'row' }}>{renderColors()}</View>
           </View>
 
-          <View style={{marginBottom: hp('5%')}}>
+          <View style={{ marginBottom: hp('5%') }}>
             <TouchableOpacity
-              style={[styles.create, {backgroundColor: getColor}]}
+              style={[styles.create, { backgroundColor: getColor }]}
               onPress={CreateTodo}>
               <Text
                 style={{
@@ -405,15 +404,15 @@ const styles = StyleSheet.create({
   VCalender: {
     justifyContent: 'space-between',
     backgroundColor: blue,
-    height:hp('6.5%'),
-    width:wp('12%'),
+    height: hp('6.5%'),
+    width: wp('12%'),
     top: hp('5.3%'),
-    borderRadius:5
+    borderRadius: 5
   },
-  iC:{
-    height:hp('6.2%'),
-    width:wp('11%'),
-    alignSelf:"center"
+  iC: {
+    height: hp('6.2%'),
+    width: wp('11%'),
+    alignSelf: "center"
 
   },
   hari: {
@@ -423,7 +422,7 @@ const styles = StyleSheet.create({
     marginTop: hp('0.2%'),
     width: wp('23%'),
     fontSize: hp('3%'),
-    color:grey1
+    color: grey1
   },
   tanggal: {
     borderWidth: StyleSheet.hairlineWidth,
@@ -433,7 +432,7 @@ const styles = StyleSheet.create({
     width: wp('30%'),
     paddingHorizontal: wp('1%'),
     fontSize: hp('3%'),
-    color:grey1
+    color: grey1
   },
   jam: {
     borderWidth: StyleSheet.hairlineWidth,
@@ -443,7 +442,7 @@ const styles = StyleSheet.create({
     width: wp('25%'),
     paddingHorizontal: wp('1%'),
     fontSize: hp('3%'),
-    color:grey1
+    color: grey1
   },
   tempat: {
     borderWidth: StyleSheet.hairlineWidth,

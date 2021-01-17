@@ -6,6 +6,7 @@ import NotifAktif from './NotifAktif'
 import Notifsurat from './NotifSurat'
 import HeaderApp from './HeaderApp'
 import TodoList from './TodoList'
+import DetailSurat from './DetailSurat'
 
 export { 
     ButtonAksi,
@@ -15,5 +16,6 @@ export {
     Notifsurat,
     UploadSurat,
     HeaderApp,
-    TodoList
+    TodoList,
+    DetailSurat
  }

@@ -1,12 +1,15 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import storage from '@react-native-firebase/storage';
 import RNFetchBlob from 'rn-fetch-blob'
-import { StyleSheet, Text, View, TouchableOpacity, Button,Image} from 'react-native'
-import { grey2,grey3, grey4, red } from '../../utils/constan.js';
+import { StyleSheet, Text, View, TouchableOpacity,Modal,PermissionsAndroid} from 'react-native'
+import { DetailSurat } from '../../component';
+import { grey2,grey3, grey4} from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { ImgSplash, ImgTodo } from '../../assets/index.js';
 
 const NotifSurat = (props) => {
+
+    const [modalVisible, setModalVisible] = useState(false);
+
     const requestCameraPermission = async () => {
         try {
           const granted = await PermissionsAndroid.request(
@@ -33,37 +36,44 @@ const NotifSurat = (props) => {
         requestCameraPermission()
     }, [])
 
-    const DoDownload = async (filename) => {
-        const viewFile = RNFetchBlob.android
-        let dirs = RNFetchBlob.fs.dirs
-        const url = await storage().ref(filename).getDownloadURL()
-        const type = await (await storage().ref(filename).getMetadata()).contentType
-        // FIXME : membuat detector mimetype menjadi format typeS
-        console.log(type.split(".")[1]);
-        await RNFetchBlob.config({
-            fileCache : true,
-            addAndroidDownloads:{
-                useDownloadManager:true,
-                notification:true,
-                path:dirs.DownloadDir+"/"+filename,
-                mime:type
-            }
-        })
-        .fetch("GET",url)
-        .then(res => {
-            viewFile.actionViewIntent(res.path(),type)
-        })
-        .catch(err => {console.log(err)})
-    }
+    // const DoDownload = async (filename) => {
+    //     const viewFile = RNFetchBlob.android
+    //     let dirs = RNFetchBlob.fs.dirs
+    //     const url = await storage().ref(filename).getDownloadURL()
+    //     const type = await (await storage().ref(filename).getMetadata()).contentType
+    //     // FIXME : membuat detector mimetype menjadi format typeS
+    //     console.log(type.split(".")[1]);
+    //     await RNFetchBlob.config({
+    //         fileCache : true,
+    //         addAndroidDownloads:{
+    //             useDownloadManager:true,
+    //             notification:true,
+    //             path:dirs.DownloadDir+"/"+filename,
+    //             mime:type
+    //         }
+    //     })
+    //     .fetch("GET",url)
+    //     .then(res => {
+    //         viewFile.actionViewIntent(res.path(),type)
+    //     })
+    //     .catch(err => {console.log(err)})
+    // }
     return (
+        
         <View style={{marginBottom:10}}>
+            <Modal
+                animationType="slide"
+                visible={modalVisible} >
+                <DetailSurat backModal={() => {
+                    setModalVisible(false)
+                }} />
+            </Modal>
             {/* <Button title="req" onPress={() => requestCameraPermission()}></Button> */}
-            <TouchableOpacity style={[styles.NotiF, { backgroundColor: grey3 }]} onPress={() => DoDownload(props.list.file_surat)} >
+            <TouchableOpacity style={[styles.NotiF, { backgroundColor: grey3 }]} onPress={() => {setModalVisible(true)}} >
                 <View style={{ flexDirection: "column" }} >
                     <View style={{ flexDirection: "row" }}>
                         <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Jenis: {props.list.jenis_surat}</Text>
                     </View>
-                    <Image style={styles.img} source={ImgTodo} />
                     <Text style={styles.isi}>Nama: {props.list.file_surat}</Text>
                 </View>
             </TouchableOpacity>
@@ -76,7 +86,7 @@ export default NotifSurat
 const styles = StyleSheet.create({
     NotiF: {
         width: wp('95%'),
-        height: hp('35%'),
+        height: hp('10%'),
         paddingHorizontal: wp('1%'),
         paddingVertical: wp('1%'),
         borderRadius: 10,
@@ -93,11 +103,6 @@ const styles = StyleSheet.create({
     txtHead: {
         fontSize: hp('2.7%'),
         fontFamily:"Poppins-SemiBold",
-    },
-    img:{
-        width:wp('92%'),
-        height:hp('25%'),
-        alignSelf:"center"
     },
     isi:{
         fontSize:hp('2.5%'),
