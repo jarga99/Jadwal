@@ -16,14 +16,15 @@ import {
   ScrollView,
   Alert,
   Button,
+  Image,
 } from 'react-native';
 import colors from '../../utils/Colors';
-import {IconBack, IconCalendar, IconNotif} from '../../assets';
+import {IconBack, IconCalendar, IconNotif, ImgCalendar} from '../../assets';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {grey4, green, white1, blue, grey0, grey2} from '../../utils/constan';
+import {grey4, green, white1, blue, grey0, grey2, grey1} from '../../utils/constan';
 import messaging from '@react-native-firebase/messaging';
 import database from '@react-native-firebase/database';
 
@@ -213,7 +214,7 @@ const AddListModal = (props) => {
             }}>
             <View style={styles.VCalender}>
               <TouchableOpacity onPress={() => showDatePicker()}>
-                <IconCalendar />
+                <Image style={styles.iC} source={ImgCalendar} />
               </TouchableOpacity>
             </View>
             <View>
@@ -403,10 +404,17 @@ const styles = StyleSheet.create({
   },
   VCalender: {
     justifyContent: 'space-between',
-    height: 60,
-    width: 55,
-    backgroundColor: green,
-    top: hp('5.4%'),
+    backgroundColor: blue,
+    height:hp('6.5%'),
+    width:wp('12%'),
+    top: hp('5.3%'),
+    borderRadius:5
+  },
+  iC:{
+    height:hp('6.2%'),
+    width:wp('11%'),
+    alignSelf:"center"
+
   },
   hari: {
     borderWidth: StyleSheet.hairlineWidth,
@@ -415,6 +423,7 @@ const styles = StyleSheet.create({
     marginTop: hp('0.2%'),
     width: wp('23%'),
     fontSize: hp('3%'),
+    color:grey1
   },
   tanggal: {
     borderWidth: StyleSheet.hairlineWidth,
@@ -424,6 +433,7 @@ const styles = StyleSheet.create({
     width: wp('30%'),
     paddingHorizontal: wp('1%'),
     fontSize: hp('3%'),
+    color:grey1
   },
   jam: {
     borderWidth: StyleSheet.hairlineWidth,
@@ -433,6 +443,7 @@ const styles = StyleSheet.create({
     width: wp('25%'),
     paddingHorizontal: wp('1%'),
     fontSize: hp('3%'),
+    color:grey1
   },
   tempat: {
     borderWidth: StyleSheet.hairlineWidth,

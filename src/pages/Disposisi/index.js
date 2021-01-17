@@ -11,6 +11,8 @@ const UploadSurat = (props) => {
     // menggunakan select
     const [getSelect] = useState("Pilih Jabatan")
 
+    const [getJabatan, setJabatan] = useState("")
+
     const [getJSurat, setJSurat] = useState("")
     const [getTSurat, setTSurat] = useState("")
 
@@ -60,7 +62,7 @@ const UploadSurat = (props) => {
                     <DropDownPicker
                         items={[
                             // label pilih jabatan
-                            { label: 'Pilih Jabatan', value: 'Pilih Jabatan' },
+                            { label: 'Pilih Jabatan', value: 'Pilih Jabatan'},
                             // label jabatan
                             { label: 'Kadin Kominfo', value: 'Kadin Kominfo' },
                             { label: 'Sekdin Kominfo', value: 'Sekdin Kominfo' },

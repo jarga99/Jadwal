@@ -1,7 +1,8 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import database from '@react-native-firebase/database';
-import { View, Text, StyleSheet, TouchableOpacity,FlatList } from 'react-native';
-import { ButtonIcon, NotifAktif } from '../../component';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList,Alert } from 'react-native';
+import SharedPreferences from 'react-native-shared-preferences'
+import { NotifAktif } from '../../component';
 import { blue, white, grey1, white1 } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { IconLetter, IconLogout, IconNotif } from '../../assets/index.js';
@@ -23,8 +24,8 @@ const Notifikasi = ({ navigation }) => {
         })
     }, [])
 
-    const RenderListNotifikasi = ({item}) => {
-        return <NotifAktif list={item}/>
+    const RenderListNotifikasi = ({ item }) => {
+        return <NotifAktif list={item} />
     }
 
     const handleGoTo = (screen) => {
@@ -39,7 +40,7 @@ const Notifikasi = ({ navigation }) => {
 
                     <Text style={styles.textHead}>Todo</Text>
 
-                    <View style={{ flexDirection: "row", marginTop: hp('-1%') }}>
+                    <View style={{ flexDirection: "row", alignSelf: "center" }}>
                         <View>
 
                             <TouchableOpacity style={styles.iconS} onPress={() => handleGoTo('Surat')}>
@@ -61,7 +62,22 @@ const Notifikasi = ({ navigation }) => {
                         </View>
 
                         <View>
-                            <TouchableOpacity style={styles.iconL} >
+                            <TouchableOpacity style={styles.iconL} onPress={() => {
+                                Alert.alert("Logout", "", [
+                                    {
+                                        text: "Oke",
+                                        onPress: () => {
+                                            SharedPreferences.getItem("user_id", (val) => {
+                                                if (val != null) {
+                                                    console.log("RUn");
+                                                    SharedPreferences.removeItem("user_id")
+                                                    navigation.replace("Login")
+                                                }
+                                            })
+                                        }
+                                    }
+                                ])
+                            }}>
                                 <View style={{ alignItems: "center" }}>
 
                                     <IconLogout />
@@ -85,10 +101,10 @@ const Notifikasi = ({ navigation }) => {
             </View>
 
             <FlatList data={getNotifikasi}
-            keyExtractor={items => console.log(items)}
-            horizontal={false}
-            showsVerticalScrollIndicator={true}
-            renderItem={(item) => RenderListNotifikasi(item)}
+                keyExtractor={items => console.log(items)}
+                horizontal={false}
+                showsVerticalScrollIndicator={true}
+                renderItem={(item) => RenderListNotifikasi(item)}
             />
 
         </View>
@@ -124,8 +140,9 @@ const styles = StyleSheet.create({
     },
     textHead: {
         color: white,
-        fontSize: 36,
+        fontSize: hp('6%'),
         fontFamily: "Poppins-SemiBold",
+        alignSelf: "center"
     },
     iconS: {
         marginVertical: hp('1.1%'),
