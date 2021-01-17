@@ -197,7 +197,7 @@ const AddListModal = (props) => {
           <IconBack title=" " />
         </TouchableOpacity>
 
-        <View style={{ alignSelf: 'stretch', marginHorizontal: wp('5%') }}>
+        <View style={{ alignSelf: 'stretch', marginHorizontal: wp('3%') }}>
           <Text style={styles.title}>Input data Jadwal</Text>
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
@@ -471,12 +471,10 @@ const styles = StyleSheet.create({
     fontSize: hp('3%'),
   },
   create: {
-    borderRadius: 25,
-    height: hp('6%'),
+    height: hp('6.5%'),
     marginTop: hp('2%'),
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: wp('30%'),
   },
   colorSelect: {
     width: 40,
