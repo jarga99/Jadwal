@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import database from '@react-native-firebase/database';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity,Alert } from 'react-native';
+import SharedPreferences from 'react-native-shared-preferences'
 import { Notifsurat } from '../../component';
 import { blue, white, grey1, white1 } from '../../utils/constan.js';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -63,7 +64,22 @@ const Surat = ({ navigation }) => {
                         </View>
 
                         <View>
-                            <TouchableOpacity style={styles.iconL} >
+                            <TouchableOpacity style={styles.iconL} onPress={() => {
+                                Alert.alert("Logout", "", [
+                                    {
+                                        text: "Oke",
+                                        onPress: () => {
+                                            SharedPreferences.getItem("user_id", (val) => {
+                                                if (val != null) {
+                                                    console.log("RUn");
+                                                    SharedPreferences.removeItem("user_id")
+                                                    navigation.replace("Login")
+                                                }
+                                            })
+                                        }
+                                    }
+                                ])
+                            }}>
                                 <View style={{ alignItems: "center" }}>
 
                                     <IconLogout />
@@ -90,7 +106,7 @@ const Surat = ({ navigation }) => {
             </View>
 
             <FlatList data={getSurat}
-                keyExtractor={items => console.log(items)}
+                keyExtractor={items => items}
                 horizontal={false}
                 showsVerticalScrollIndicator={true}
                 renderItem={(item) => RenderListSurat(item)}
@@ -131,25 +147,25 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: hp('6%'),
         fontFamily: "Poppins-SemiBold",
-        alignSelf:"center"
+        alignSelf: "center"
     },
     iconS: {
         marginVertical: hp('1.1%'),
-        paddingHorizontal:wp('2%')
+        paddingHorizontal: wp('2%')
 
     },
     iconN: {
         marginVertical: hp('1.1%'),
-        paddingHorizontal:wp('2')
- 
+        paddingHorizontal: wp('2')
+
 
     },
     iconL: {
         marginVertical: hp('1.1%'),
 
     },
-    txtI:{
-        color:white1,
+    txtI: {
+        color: white1,
         fontFamily: "Poppins-SemiBold",
     },
     divider: {

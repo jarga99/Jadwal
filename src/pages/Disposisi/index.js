@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   TextInput,
-  Alert,
+  Alert
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -22,52 +22,34 @@ import {
   white,
   white1,
 } from '../../utils/constan';
-import SharedPreferences from 'react-native-shared-preferences';
-import messaging from '@react-native-firebase/messaging';
+import database from '@react-native-firebase/database';
 const Disposisi = (props) => {
   // menggunakan select
-  const [getJabatan, setJabatan] = useState('Pilih Jabatan');
+  const [getJabatan, setJabatan] = useState('');
 
-  const [getJSurat, setJSurat] = useState('');
-  const [getTSurat, setTSurat] = useState('');
-  useEffect(() => {
-    SharedPreferences.getItems(['user_id', 'username', 'fcm_token'], (val) => {
-      //   setJSurat(val[2])
-    });
-  }, []);
+  const [getNama, setNama] = useState('');
 
-  // const CreateTodo = async () => {
-  //     try {
-  //         var datas = {
-  //             user_info:{
-  //                 id:"",
-  //                 email:""
-  //             },
-  //             event_detail:{
-
-  //                 tempat:getTempat,
-  //                 acara:getAcara,
-
-  //             },
-  //             dateCreate:new Date().getTime()
-  //         }
-  //         const eventId = new Date().getTime() + new Date().getDay()
-  //         let DoInsert = await database().ref("/events/"+eventId)
-  //         .set(datas)
-  //         .then(() => {
-  //             Alert.alert(
-  //                 "Upload Surat Berhasil",
-  //                 "Anda Berhasil Menambahkan Surat",
-  //                 [
-  //                   { text: "OK", onPress: () =>  props.backModal() }
-  //                 ],
-  //                 { cancelable: false }
-  //               );
-  //         })
-  //     } catch (error) {
-  //         Alert.alert("Gagal Upload Surat",[{text:"OK"}],{ cancelable: false })
-  //     }
-  // }
+  const DoNotif = async (nama, jabatan) => {
+    try {
+      const notifId = new Date().getTime() + new Date().getDay();
+      let DoInsert = await database()
+        .ref('/notif/' + notifId)
+        .set({
+          nama: nama,
+          jabatan: jabatan,
+        })
+        .then((res) => {
+          Alert.alert(
+            'Input Disposisi Berhasil',
+            'Anda Berhasil Menambhakan Disposisi',
+            [{text: 'OK'}],
+            {cancelable: false},
+          );
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -110,14 +92,9 @@ const Disposisi = (props) => {
             selectedtLabelStyle={{
               color: '#39739d',
             }}
+            onChangeItem={(text) => setJabatan(text.value)}
             onChangeText={(text) => setJabatan(text)}
           />
-
-          {/* <TextInput style={{ borderColor: blue, borderWidth: 2, borderRadius: 10, fontSize: hp('2.5%') }}
-                placeholder="Isi jabatan"
-                onChangeText={text => this.setState({ jabatan: text })}>
-
-              </TextInput> */}
         </View>
 
         <View>
@@ -129,14 +106,10 @@ const Disposisi = (props) => {
             }}>
             Nama
           </Text>
-          <TextInput
-            style={styles.dN}
-            value={getJSurat}
-            onChangeText={(text) => setJSurat(text)}
-          />
+          <TextInput style={styles.dN} onChangeText={(text) => setNama(text)} />
         </View>
 
-        <TouchableOpacity style={[styles.create, {backgroundColor: green}]}>
+        <TouchableOpacity style={[styles.create, {backgroundColor: green}]} onPress={() => DoNotif(getNama,getJabatan)}>
           <Text
             style={{
               fontFamily: 'Poppins-SemiBold',
@@ -214,194 +187,3 @@ const styles = StyleSheet.create({
   },
 });
 export default Disposisi;
-
-// export default class AddListModal extends React.Component {
-//     backgroundColors = ["#5CD859", "#24A6D9", "#595BD9", "#8022D9", "#D159D8", "#D85963", "#D88559"];
-
-//     state = {
-//         hari: "",
-//         tanggal: "",
-//         jam: "",
-//         tempat: "",
-//         acara: "",
-//         keterangan: "",
-//         color: this.backgroundColors[0]
-//     };
-
-//     createTodo = () => {
-//         const { hari, tanggal, jam, tempat, acara, keterangan, color } = this.state
-
-//         tempData.push({
-//             hari,
-//             tanggal,
-//             jam,
-//             tempat,
-//             acara,
-//             keterangan,
-//             color
-//         });
-
-//         this.setState({ hari: "", tanggal: "", jam: "", tempat: "", acara: "", keterangan: "" });
-//         this.props.backModal();
-//     }
-
-// renderColors() {
-//     return this.backgroundColors.map(color => {
-//         return (
-//             <TouchableOpacity key={color} style={[styles.colorSelect, { backgroundColor: color }]}
-//                 onPress={() => this.setState({ color })}
-//             />
-//         )
-//     })
-// }
-//     render() {
-//     return (
-// <KeyboardAvoidingView style={styles.container} >
-
-//     <ScrollView style={{ width: wp('100%') }}>
-//         <TouchableOpacity style={{ position: "absolute", top: hp('2.5%'), right: wp('4%'), justifyContent: "space-between" }} onPress={this.props.backModal}>
-
-//             <IconBack title=" " />
-
-//         </TouchableOpacity>
-
-//         <View style={{ alignSelf: "stretch", marginHorizontal: wp('5%') }}>
-//             <Text style={styles.title}>Input data Todo</Text>
-
-//             <View style={{ flexDirection: "row", justifyContent: "space-between", flex: 1 }}>
-//                 <View>
-//                     <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Hari</Text>
-//                     <TextInput style={styles.hari} onChangeText={text => this.setState({ hari: text })} />
-//                 </View>
-//                 <View>
-//                     <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Tanggal</Text>
-//                     <TextInput style={styles.tanggal} onChangeText={text => this.setState({ tanggal: text })} />
-//                 </View>
-//                 <View>
-//                     <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Jam</Text>
-//                     <TextInput style={styles.jam} onChangeText={text => this.setState({ jam: text })} />
-//                 </View>
-
-//             </View>
-
-//             <View>
-//                 <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Tempat</Text>
-//                 <TextInput style={styles.tempat} onChangeText={text => this.setState({ tempat: text })} />
-//             </View>
-//             <View>
-//                 <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Acara</Text>
-//                 <TextInput style={styles.acara} multiline={true} numberOfLines={4} onChangeText={text => this.setState({ acara: text })} />
-//             </View>
-
-//             <View>
-//                 <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", color: grey4 }}>Keterangan</Text>
-//                 <TextInput style={styles.keterangan} onChangeText={text => this.setState({ keterangan: text })} />
-//             </View>
-
-//             <View style={{ flexDirection: "column", marginTop: 12, alignSelf: "center" }}>
-//                 <Text style={{ fontSize: hp('3%'), fontFamily: "Poppins-SemiBold", textAlign: "center", color: grey4 }}>Warna</Text>
-//                 <View style={{ flexDirection: "row", }}>
-//                     {this.renderColors()}
-//                 </View>
-//             </View>
-
-//             <TouchableOpacity style={[styles.create, { backgroundColor: this.state.color }]} onPress={this.createTodo}>
-//                 <Text style={{ color: colors.white, fontFamily: "Poppins-SemiBold", fontSize: hp('3%') }}>Create</Text>
-
-//             </TouchableOpacity>
-//         </View>
-//     </ScrollView>
-
-// </KeyboardAvoidingView>
-
-//     )
-// }
-// }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         justifyContent: "space-between",
-//         flex: 1
-//     },
-
-//     title: {
-//         fontSize: hp('4%'),
-//         fontFamily: "Poppins-SemiBold",
-//         color: colors.black,
-//         alignSelf: "center",
-//         marginTop: hp('4%'),
-//         marginBottom: hp('4%')
-//     },
-//     hari: {
-//         borderWidth: StyleSheet.hairlineWidth,
-//         borderColor: colors.blue,
-//         borderRadius: 6,
-//         height: hp('6%'),
-//         marginTop: hp('0.2%'),
-//         width: wp('22%'),
-//         fontSize: hp('3%'),
-//     },
-//     tanggal: {
-//         borderWidth: StyleSheet.hairlineWidth,
-//         borderColor: colors.blue,
-//         borderRadius: 6,
-//         height: hp('6%'),
-//         marginTop: hp('0.2%'),
-//         width: wp('40%'),
-//         paddingHorizontal: wp('1%'),
-//         fontSize: hp('3%')
-//     },
-//     jam: {
-//         borderWidth: StyleSheet.hairlineWidth,
-//         borderColor: colors.blue,
-//         borderRadius: 6,
-//         height: hp('6%'),
-//         marginTop: hp('0.2%'),
-//         width: wp('22%'),
-//         paddingHorizontal: wp('1%'),
-//         fontSize: hp('3%')
-//     },
-//     tempat: {
-//         borderWidth: StyleSheet.hairlineWidth,
-//         borderColor: colors.blue,
-//         borderRadius: 6,
-//         height: hp('6%'),
-//         marginTop: hp('0.2%'),
-//         paddingHorizontal: wp('1%'),
-//         fontSize: hp('3%')
-//     },
-//     acara: {
-//         borderWidth: StyleSheet.hairlineWidth,
-//         borderColor: colors.blue,
-//         textAlignVertical: "top",
-//         borderRadius: 6,
-//         height: hp('20%'),
-//         marginTop: hp('0.2%'),
-//         paddingHorizontal: wp('1%'),
-//         fontSize: hp('3%')
-//     },
-//     keterangan: {
-//         borderWidth: StyleSheet.hairlineWidth,
-//         borderColor: colors.blue,
-//         borderRadius: 6,
-//         height: hp('6%'),
-//         marginTop: hp('0.2%'),
-//         paddingHorizontal: wp('1%'),
-//         fontSize: hp('3%')
-//     },
-
-//     create: {
-//         borderRadius: 25,
-//         height: hp('6%'),
-//         marginTop: hp('2%'),
-//         alignItems: "center",
-//         justifyContent: "center",
-//         marginHorizontal: wp('30%'),
-//     },
-//     colorSelect: {
-//         width: 40,
-//         height: 40,
-//         borderRadius: 10,
-//         marginHorizontal: wp('0.5%')
-//     }
-// })

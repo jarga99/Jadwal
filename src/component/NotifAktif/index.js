@@ -9,8 +9,8 @@ const NotifAktif = (props) => {
             <TouchableOpacity style={[styles.NotiF, { backgroundColor: grey3 }]} >
                 <View style={{ flexDirection: "column" }} >
                     <View style={{ flexDirection: "row" }}>
-                        <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Nama :{props.list.jenis_surat}</Text>
-                        <Text style={[styles.txtHead, {width:wp('28%'),color:red, textAlign:"right" }]} > {props.list.jam}</Text>
+                        <Text style={[styles.txtHead,{width:wp('65%'),color:grey2} ]} >Nama :{props.list.nama}</Text>
+                        <Text style={[styles.txtHead, {width:wp('28%'),color:red, textAlign:"right" }]} > {props.list.jabatan}</Text>
                     </View>
                     <Text style={styles.isi}>{props.list.tempat}</Text>
                 </View>
