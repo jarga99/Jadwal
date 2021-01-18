@@ -49,7 +49,7 @@ const DetailSurat = (props) => {
 
             <View style={[styles.Vd, { flexDirection: "column", backgroundColor: grey0 }]} >
                <View style={{ flexDirection: "row" }}>
-                  <Text style={[styles.txtHead, { color: grey2}]} >Jenis: get jenis surat</Text>
+                  <Text style={[styles.txtHead, { color: grey2 }]} >Jenis: get jenis surat</Text>
                </View>
                <Image style={styles.img} source={ImgTodo} />
                <Text style={styles.isi}>Nama: get nama file</Text>
@@ -72,6 +72,20 @@ const DetailSurat = (props) => {
                      Download
               </Text>
                </TouchableOpacity>
+               <TouchableOpacity
+                  style={styles.hapus}
+                  onPress
+               >
+                  <Text
+                     style={{
+                        color: colors.white,
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: hp('3%'),
+                     }}
+                  >
+                     Hapus
+                  </Text>
+               </TouchableOpacity>
             </View>
          </View>
       </View>
@@ -89,8 +103,8 @@ const styles = StyleSheet.create({
       marginTop: hp('4%'),
       marginBottom: hp('4%'),
    },
-   Vd:{
-      height:hp('55%'),
+   Vd: {
+      height: hp('55%'),
       borderRadius: 5,
       borderColor: grey3,
       borderWidth: 4,
@@ -101,10 +115,17 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
    },
+   hapus: {
+      backgroundColor: red,
+      height: hp('6%'),
+      marginTop: hp('2%'),
+      alignItems: 'center',
+      justifyContent: 'center',
+   },
    txtHead: {
       fontSize: hp('2.7%'),
       fontFamily: "Poppins-SemiBold",
-      height:hp('8%')
+      height: hp('8%')
    },
    img: {
       borderRadius: 5,
@@ -113,12 +134,12 @@ const styles = StyleSheet.create({
       width: wp('90%'),
       borderWidth: 4,
       alignSelf: "center",
-      marginVertical:5
+      marginVertical: 5
    },
    isi: {
       fontSize: hp('2.5%'),
       textTransform: "capitalize",
       color: grey4,
-      height:hp('6%')
+      height: hp('6%')
    }
 })
